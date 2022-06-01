@@ -1,6 +1,7 @@
 html,
 body {
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 #login {
@@ -19,23 +20,33 @@ a:hover{
 }
 
 #cadastro {
-    padding: 30px 30px 30px 30px;
+    padding: 30px;
     border-radius: 3px;
     background-color: rgba(0, 0, 0, 0.11);
     margin-top: 50px;
-    width: 60vw;
+    width: 30vw;
     height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-#formExemplo{
-    width: 100%;
-}
+
 #btn-enviar{
     float: right;
 }
 .form-group {
     margin-top: 20px;
+}
+
+/* responsive to mobile */
+
+@media screen and (max-width: 767px) {
+    #cadastro {
+        width: 90vw;
+        height: 80vh;
+    }
+    #formExemplo{
+        overflow: scroll;
+    }
 }
