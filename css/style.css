@@ -10,18 +10,28 @@ body {
     flex-direction: column;
 }
 
-#pag-cadastrato {
+a{
     text-decoration: none;
+    color: white;
+}
+a:hover{
     color: white;
 }
 
 #cadastro {
-    padding: 30px;
+    padding: 30px 30px 30px 30px;
     border-radius: 3px;
     background-color: rgba(0, 0, 0, 0.11);
     margin-top: 50px;
     width: 60vw;
     height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#formExemplo{
+    width: 100%;
 }
 #btn-enviar{
     float: right;
