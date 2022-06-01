@@ -20,7 +20,7 @@ body {
     border-radius: 3px;
     background-color: rgba(0, 0, 0, 0.11);
     margin-top: 50px;
-    width: 60vh;
+    width: 60vw;
     height: 80vh;
 }
 #btn-enviar{
