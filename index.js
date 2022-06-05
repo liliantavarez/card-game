@@ -29,7 +29,7 @@ const Post = require('./modelos/Post')
     })
     app.post('/save', function(req, res){
         Post.create({
-            nome: req.body.
+            nome: req.body.nome,
             email: req.body.email,
             senha: req.body.senha
         })
