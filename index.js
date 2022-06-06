@@ -12,6 +12,7 @@ const Post = require('./modelos/Post')
     app.engine("handlebars", engine({defaultLayout: 'main'}))
     app.set("view engine", "handlebars")
     app.set("views", "./views")
+    app.use('/public', express.static('public'));
 
     //body Parser
     app.use(bodyParser.urlencoded({extended: false}))
