@@ -3,7 +3,7 @@ const { engine } = require("express-handlebars");
 const app = express();
 const bodyParser = require("body-parser");
 const Sequelize = require("sequelize");
-const Post = require("./modelos/Post");
+const post = require("./modelos/Post");
 
 //config
 //template engine
@@ -24,17 +24,36 @@ app.use(bodyParser.json());
 // })
 
 //rotas
+app.get("/login", function (req, res) {
+  res.render("login");
+});
+
+// app.get("/login", function (req, res) {
+//   res.render("login");
+// });
+
 app.get("/", function (req, res) {
   res.render("cadastro");
 });
 
 app.post("/save", function (req, res) { 
-    let cadastro ={
+    post.create({
         nome: req.body.nome,
         email: req.body.email,
-        senha: req.body.senha
-    }
-    res.send(cadastro)
+        senha: req.body.senha        
+    }).then(()=>{
+        res.redirect('/')
+        // res.send("Cadastro inserido no banco de dados")
+    }).catch((err)=>{
+        res.send("Erro ao realizar cadastro", err)
+    })
+
+    // let cadastro ={
+    //     nome: req.body.nome,
+    //     email: req.body.email,
+    //     senha: req.body.senha
+    // }
+    // res.send(cadastro)
 });
 
 app.listen(8081, function () {
