@@ -2,12 +2,12 @@
         <form action="/save" method="POST" data-toggle="validator" role="form">
             <div class="form-group">
                 <label for="textNome" class="control-label">Nome</label>
-                <input id="textNome" class="form-control" placeholder="Digite seu Nome" type="text" required>
+                <input id="textNome" name="nome" class="form-control" placeholder="Digite seu Nome" type="text" required>
             </div>
 
             <div class="form-group">
                 <label for="inputEmail" class="control-label">Email</label>
-                <input id="inputEmail" class="form-control" placeholder="Digite seu E-mail" type="email"
+                <input id="inputEmail" name="email" class="form-control" placeholder="Digite seu E-mail" type="email"
                     data-error="Por favor, informe um e-mail correto." required>
                 <div class="help-block with-errors"></div>
             </div>
@@ -21,14 +21,14 @@
 
             <div class="form-group">
                 <label for="inputConfirm" class="control-label">Confirme a Senha</label>
-                <input type="password" class="form-control" id="inputConfirm" placeholder="Confirme sua Senha"
+                <input type="password" name="senha" class="form-control" id="inputConfirm" placeholder="Confirme sua Senha"
                     data-match="#inputPassword" data-match-error="Atenção! As senhas não estão iguais." required>
                 <div class="help-block with-errors"></div>
             </div>
 
             <div class="form-group">
-                <button id="btn-enviar" type="submit" class="mt-4 btn btn-dark btn-lg">Enviar</button>
-                <button id="btn-voltar" class="mt-4 btn btn-dark btn-lg"><a href="/Index.html">Voltar</a></button>
+                <button id="btn-enviar" type="submit" class="mt-4 btn btn-dark btn-lg"><a href="/">Enviar</a></button>
+                <button id="btn-voltar" class="mt-4 btn btn-dark btn-lg"><a href="/">Voltar</a></button>
             </div>
         </form>
     </div>
