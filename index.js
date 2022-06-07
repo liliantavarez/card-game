@@ -10,8 +10,8 @@ const post = require("./modelos/Post");
 app.engine("handlebars", engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-app.set("views", "./views")
-app.use('/public', express.static('public'));
+app.set("views", "./views");
+app.use("/public", express.static("public"));
 
 //body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,24 +32,27 @@ app.get("/", function (req, res) {
   res.render("login");
 });
 
-app.post("/save", function (req, res) { 
-    post.create({
-        nome: req.body.nome,
-        email: req.body.email,
-        senha: req.body.senha        
-    }).then(()=>{
-        res.redirect('/')
-        // res.send("Cadastro inserido no banco de dados")
-    }).catch((err)=>{
-        res.send("Erro ao realizar cadastro", err)
+app.post("/save", function (req, res) {
+  post
+    .create({
+      nome: req.body.nome,
+      email: req.body.email,
+      senha: req.body.senha,
     })
+    .then(() => {
+      res.redirect("/");
+      // res.send("Cadastro inserido no banco de dados")
+    })
+    .catch((err) => {
+      res.send("Erro ao realizar cadastro", err);
+    });
 
-    // let cadastro ={
-    //     nome: req.body.nome,
-    //     email: req.body.email,
-    //     senha: req.body.senha
-    // }
-    // res.send(cadastro)
+  // let cadastro ={
+  //     nome: req.body.nome,
+  //     email: req.body.email,
+  //     senha: req.body.senha
+  // }
+  // res.send(cadastro)
 });
 
 app.listen(8081, function () {
