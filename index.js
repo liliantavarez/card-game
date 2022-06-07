@@ -24,16 +24,12 @@ app.use(bodyParser.json());
 // })
 
 //rotas
-app.get("/login", function (req, res) {
-  res.render("login");
+app.get("/cadastro", function (req, res) {
+  res.render("cadastro");
 });
 
-// app.get("/login", function (req, res) {
-//   res.render("login");
-// });
-
 app.get("/", function (req, res) {
-  res.render("cadastro");
+  res.render("login");
 });
 
 app.post("/save", function (req, res) { 
