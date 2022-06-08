@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const Sequelize = require("sequelize");
 const post = require("./modelos/Post");
-const nodemailer = require("nodemailer");
+
 
 //config
 //template engine
