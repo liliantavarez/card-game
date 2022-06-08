@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const Sequelize = require("sequelize");
 const post = require("./modelos/Post");
 
+
 //config
 //template engine
 app.engine("handlebars", engine({ defaultLayout: "main" }));
