@@ -2,9 +2,7 @@ const express = require("express");
 const { engine } = require("express-handlebars");
 const app = express();
 const bodyParser = require("body-parser");
-const Sequelize = require("sequelize");
 const post = require("./modelos/Post");
-
 
 //config
 //template engine

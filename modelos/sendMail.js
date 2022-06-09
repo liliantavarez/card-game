@@ -1,21 +1,34 @@
 const nodemailer = require("nodemailer");
 
-let transporter =  nodemailer.createTransport({
+
+//recsenha
+//lembrar de mudar as configs pra verificar a senha no banco e enviar pro email
+//por favor não hackeia meu email :((((((
+const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
-    auth: {
-      user:"kelvenunes123@gmail.com",
-      pass: "fvenckmrtrrseerr"
-    }  
+  auth: {
+    user:"kelvenunes123@gmail.com",
+    pass:"fvenckmrtrrseerr"
+  },
+  tls: {
+    rejectUnauthorized: false
+  }
+})
+async function run(){
+  const sendMail = await transporter.sendMail({
+    
+    text: "Se der certo vou subir",
+    subject: "Me avisa se chegou pra tu sapatão",
+    from: "Card game<kelvenunes123@gmail.com>",
+    to:  "kelvenunes123@gmail.com"
+    
   })
   
-  //colocar no index depois de verificar no BD
-  /*transporter.sendMail({
-    from: "Card game<kelvenunes123@gmail.com>",
-    to: "@liliancristianecarvalhotavares",
-    subject: "Me avisa se chegou pra tu sapatão",
-    text: "Se der certo vou subir",
-    html:"bjs :v"
-  
-  })*/
+}
+run();
+
+module.exports = {
+    transporter: transporter
+}
