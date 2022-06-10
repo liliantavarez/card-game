@@ -16,18 +16,18 @@ const transporter = nodemailer.createTransport({
     rejectUnauthorized: false
   }
 })
-async function run(){
+//envio
+/*async function run(){
   const sendMail = await transporter.sendMail({
-    
-    text: "Se der certo vou subir",
-    subject: "Me avisa se chegou pra tu sapatão",
+    text: "Sua senha",
+    subject: '',
     from: "Card game<kelvenunes123@gmail.com>",
     to:  "kelvenunes123@gmail.com"
-    
   })
-  
+    
 }
-run();
+  
+run();*/
 
 module.exports = {
     transporter: transporter

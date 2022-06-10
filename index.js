@@ -2,7 +2,11 @@ const express = require("express");
 const { engine } = require("express-handlebars");
 const app = express();
 const bodyParser = require("body-parser");
-const post = require("./modelos/Post");
+const Post = require("./modelos/Post");
+const { transporter } = require("./modelos/sendMail");
+
+
+
 
 //config
 //template engine
@@ -31,8 +35,22 @@ app.get("/", function (req, res) {
   res.render("login");
 });
 
-app.post("/save", function (req, res) { 
-    post.create({
+app.get("/recSenha" , async function(req, res) {
+  res.render('recSenha')
+  //const emailRec = await Post.findOne({where: {
+    //email: req.body.emailRec
+  //}})
+  /*if(emailRec === req.body.emailRec){
+    const envia = transporter.sendMail({
+      text: "Sua senha",
+      subject: 'sua senha',
+      from: "Card game<kelvenunes123@gmail.com>",
+      to:  "kelvenunes123@gmail.com"
+    })
+  }*/
+})
+app.post("/cadastro", function (req, res) { 
+  Post.create({
         nome: req.body.nome,
         email: req.body.email,
         senha: req.body.senha        
@@ -50,6 +68,10 @@ app.post("/save", function (req, res) {
     // }
     // res.send(cadastro)
 });
+
+
+
+
 
 app.listen(8081, function () {
   console.log("servidor rodando localhost:8081");

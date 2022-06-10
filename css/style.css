@@ -32,6 +32,7 @@ a:hover{
     flex-direction: column;
 }
 
+
 #formExemplo{
     width: 90%;
 }
@@ -42,6 +43,7 @@ a:hover{
 .form-group {
     margin-top: 20px;
 }
+
 
 /* responsive to mobile */
 
