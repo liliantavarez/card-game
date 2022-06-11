@@ -5,10 +5,10 @@ body {
 }
 
 #login {
-
     display: flex;
     align-items: stretch;
     flex-direction: column;
+    margin-top: 10px;
 }
 
 a {
@@ -20,39 +20,26 @@ a:hover {
     color: white;
 }
 
-.container-recSenha {
-    text-align: center;
-    position: absolute;
-    width: 100%;
-}
-
-.row{
-    background-color: brown;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-}
 #cadastro {
-    width: 35vw;
-    height: 80vh;
     padding: 30px;
     border-radius: 3px;
     background-color: rgba(0, 0, 0, 0.11);
     margin-top: 50px;
+    width: 50vw;
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-#formExemplo{
-    width: 90%;
+#form-cadastro,
+#login {
+    width: 45vw;
+    overflow-y: auto;
 }
 
-#btn-enviar{
+#btn-enviar {
     float: right;
 }
 
@@ -60,16 +47,17 @@ a:hover {
     margin-top: 20px;
 }
 
-
 /* responsive to mobile */
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 770px) {
     #cadastro {
         width: 90vw;
         height: 80vh;
     }
 
-    #formExemplo {
+    #form-cadastro,
+    #login {
+        width: 85vw;
         overflow: auto;
     }
 }

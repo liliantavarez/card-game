@@ -1,7 +1,7 @@
     <main id="login" class="container text-center">
         <div class="justify-content-center align-itens-center row">
             <form action="/cad" method="POST" form id="login" class="col-4">
-                <img class="my-5 mx-auto" src="Imagens/FRUPxzhX0AIyh5Y.jpg" alt="" width="72" height="69">
+                <img class="my-5 mx-auto" src="/public/imgs/card-game-cards-hold-512.webp" alt="" width="72" height="69">
                 <h1 class="h3 mb-3 fw-normal">
                         Informações de login
                 </h1>
@@ -14,8 +14,19 @@
                     <label for="floatingPassword">Senha</label>
                 </div>
                 
-                <button class="w-100 my-2 btn btn-dark btn-lg " type="submit"><a href=""></a> Login</button> 
-                <button class="w-100 btn btn-dark btn-lg" ><a href="html/cadastro.html">Criar nova conta</a></button>
+                <button class="w-100 my-2 btn btn-dark btn-lg" name="btLogin" type="submit">Login</button> 
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                        </li>
+                        <a class="page-link" href="/recSenha">Esqueceu a Senha?</a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <button class="w-100 btn btn-dark btn-lg" name="cadastro" type="submit" ><a href="/cadastro">Criar nova conta</a></button>
+                
                
             </form>
         </div>
