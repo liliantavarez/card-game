@@ -11,27 +11,42 @@ body {
     flex-direction: column;
 }
 
-a{
+a {
     text-decoration: none;
     color: white;
 }
-a:hover{
+
+a:hover {
     color: white;
 }
 
+.container-recSenha {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+}
+
+.row{
+    background-color: brown;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
 #cadastro {
+    width: 35vw;
+    height: 80vh;
     padding: 30px;
     border-radius: 3px;
     background-color: rgba(0, 0, 0, 0.11);
     margin-top: 50px;
-    width: 30vw;
-    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-
 
 #formExemplo{
     width: 90%;
@@ -40,6 +55,7 @@ a:hover{
 #btn-enviar{
     float: right;
 }
+
 .form-group {
     margin-top: 20px;
 }
@@ -52,7 +68,8 @@ a:hover{
         width: 90vw;
         height: 80vh;
     }
-    #formExemplo{
+
+    #formExemplo {
         overflow: auto;
     }
 }
