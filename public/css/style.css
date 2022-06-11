@@ -5,17 +5,18 @@ body {
 }
 
 #login {
-
     display: flex;
     align-items: stretch;
     flex-direction: column;
+    margin-top: 10px;
 }
 
-a{
+a {
     text-decoration: none;
     color: white;
 }
-a:hover{
+
+a:hover {
     color: white;
 }
 
@@ -24,7 +25,7 @@ a:hover{
     border-radius: 3px;
     background-color: rgba(0, 0, 0, 0.11);
     margin-top: 50px;
-    width: 30vw;
+    width: 50vw;
     height: 80vh;
     display: flex;
     justify-content: center;
@@ -32,25 +33,31 @@ a:hover{
     flex-direction: column;
 }
 
-#formExemplo{
-    width: 90%;
+#form-cadastro,
+#login {
+    width: 45vw;
+    overflow-y: auto;
 }
 
-#btn-enviar{
+#btn-enviar {
     float: right;
 }
+
 .form-group {
     margin-top: 20px;
 }
 
 /* responsive to mobile */
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 770px) {
     #cadastro {
         width: 90vw;
         height: 80vh;
     }
-    #formExemplo{
+
+    #form-cadastro,
+    #login {
+        width: 85vw;
         overflow: auto;
     }
 }
