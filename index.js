@@ -1,11 +1,17 @@
 const express = require("express");
 const {engine} = require("express-handlebars")
 const app = express();
+<<<<<<< Updated upstream
 const bodyParser = require('body-parser')
 const Sequelize  = require("sequelize");
 const Post = require('./modelos/Post')
 
 
+=======
+const bodyParser = require("body-parser");
+const Post = require("./modelos/Post");
+const { transporter } = require("./modelos/sendMail");
+>>>>>>> Stashed changes
 
 //config
     //template engine
