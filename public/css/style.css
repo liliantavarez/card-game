@@ -18,7 +18,11 @@ a{
 a:hover{
     color: white;
 }
-
+.btns{
+    margin-top: 30px;
+    display:flex;
+    justify-content: space-between
+}
 #cadastro {
     padding: 30px;
     border-radius: 3px;

@@ -1,12 +1,10 @@
 const express = require("express");
 const { engine } = require("express-handlebars");
 const app = express();
+const Sequelize  = require("sequelize");
 const bodyParser = require("body-parser");
 const Post = require("./modelos/Post");
 const { transporter } = require("./modelos/sendMail");
-
-
-
 
 //config
 //template engine
