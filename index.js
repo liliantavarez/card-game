@@ -1,7 +1,7 @@
 const express = require("express");
 const { engine } = require("express-handlebars");
 const app = express();
-const Sequelize  = require("sequelize");
+const Sequelize = require("sequelize");
 const bodyParser = require("body-parser");
 const Post = require("./modelos/Post");
 const { transporter } = require("./modelos/sendMail");
@@ -11,8 +11,8 @@ const { transporter } = require("./modelos/sendMail");
 app.engine("handlebars", engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-app.set("views", "./views")
-app.use('/public', express.static('public'));
+app.set("views", "./views");
+app.use("/public", express.static("public"));
 
 //body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,43 +33,50 @@ app.get("/", function (req, res) {
   res.render("login");
 });
 
-app.get("/recSenha" , async function(req, res) {
-  res.render('recSenha')
-  //const emailRec = await Post.findOne({where: {
-    //email: req.body.emailRec
-  //}})
-  /*if(emailRec === req.body.emailRec){
-    const envia = transporter.sendMail({
-      text: "Sua senha",
-      subject: 'sua senha',
-      from: "Card game<kelvenunes123@gmail.com>",
-      to:  "kelvenunes123@gmail.com"
-    })
-  }*/
-})
-app.post("/cadastro", function (req, res) { 
-  Post.create({
-        nome: req.body.nome,
-        email: req.body.email,
-        senha: req.body.senha        
-    }).then(()=>{
-        res.redirect('/')
-        // res.send("Cadastro inserido no banco de dados")
-    }).catch((err)=>{
-        res.send("Erro ao realizar cadastro", err)
-    })
-
-    // let cadastro ={
-    //     nome: req.body.nome,
-    //     email: req.body.email,
-    //     senha: req.body.senha
-    // }
-    // res.send(cadastro)
+app.get("/recSenha", function (req, res) {
+  res.render("recSenha");
 });
 
+app.post("/recSenha", async function (req, res) {
+  let emailRec = req.body.emailRec;
+  const date = await Post.findOne({ where: { email: emailRec } })
+    .then((date) => {
+      transporter.sendMail({
+        html: `<h3>Olá, ${date.nome}</h3>
+      <p>Essa é sua senha de acesso: ${date.senha}`,
+        subject: "Senha de acesso CardGame",
+        from: "Card Game <recsenhacardgame@gmail.com>",
+        to: date.email,
+      });
+      res.redirect("/recSenha");
+      // res.send("E-mail enviado com sucesso!")
+    })
+    .catch(() => {
+      res.send("E-mail nao cadastrado");
+    });
+});
 
+app.post("/cadastro", function (req, res) {
+  Post.create({
+    nome: req.body.nome,
+    email: req.body.email,
+    senha: req.body.senha,
+  })
+    .then(() => {
+      res.redirect("/");
+      // res.send("Cadastro inserido no banco de dados")
+    })
+    .catch((err) => {
+      res.send("Erro ao realizar cadastro", err);
+    });
 
-
+  // let cadastro ={
+  //     nome: req.body.nome,
+  //     email: req.body.email,
+  //     senha: req.body.senha
+  // }
+  // res.send(cadastro)
+});
 
 app.listen(8081, function () {
   console.log("servidor rodando localhost:8081");
