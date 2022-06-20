@@ -37,6 +37,10 @@ app.get("/recSenha", function (req, res) {
   res.render("recSenha");
 });
 
+app.get("/perfil", function (req, res) {
+  res.render("perfil");
+});
+
 app.post("/recSenha", async function (req, res) {
   let emailRec = req.body.emailRec;
   const date = await Post.findOne({ where: { email: emailRec } })

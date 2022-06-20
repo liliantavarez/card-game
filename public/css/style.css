@@ -1,15 +1,23 @@
+@import url(//db.onlinewebfonts.com/c/50cd2aad9c8f35800bb6beac3ad42f16?family=Azonix);
+
+
+
 html,
 body {
     width: 100vw;
     height: 100vh;
-}
-
-#login {
-
+    font-family: 'Signika', sans-serif;
     display: flex;
-    align-items: stretch;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
+
+.background {
+    width: 100vw;
+    height: 100vh;
+  }
+
 
 a{
     text-decoration: none;
@@ -20,9 +28,8 @@ a:hover{
 }
 .btns{
     margin-top: 30px;
-    display:flex;
-    justify-content: space-between
 }
+
 #cadastro {
     padding: 30px;
     border-radius: 3px;
@@ -36,7 +43,7 @@ a:hover{
     flex-direction: column;
 }
 
-#formExemplo{
+#form-cadastro{
     width: 90%;
 }
 
@@ -47,14 +54,89 @@ a:hover{
     margin-top: 20px;
 }
 
+.menu{
+    height: 55px;
+    margin-top:10PX ;
+    background-color:#6ba6a2 ;
+    border-radius: 5px;
+    justify-content: center
+    
+}
+
+.menu,.container-perfil{
+    align-items: center;
+    display: flex;
+
+}
+
+#btn-jogar{
+    margin-top: 50px;
+    width: 90px;
+    height: 30px;
+
+}
+.btn-color{
+    border-radius: 5px;
+
+    background-color: #265a5d;
+    border: #6ba6a2;
+    color: azure;
+}
+.container-perfil {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    flex-direction: column;
+}
+#perfil{
+   display: flex;
+   margin-left: 20px;
+}
+#img-perfil{
+    margin: 10px;
+}
+#nome-perfil{
+    margin-top: 24px;
+    font-size: 20px;
+    color: azure;
+}
+#btn-img{
+    margin-top: -5px;
+    width: 120px;
+    margin-left: 16px;
+}
+.container__main, .container__cards,.menu{   
+    width: 90vw;
+}
+.container__main, .container__middle {
+    display: flex;
+    flex-direction: column;
+}
+
+.container__middle {
+    margin-top: 80px;
+    background-color: #6ba6a2;
+    border-radius: 5px;
+}
+.container__cards{
+    margin-top: 20px;
+    height: 250px;
+    background-color: #6ba6a2;
+}
+#btn-criar-carta{
+    float:right;
+    margin-right: 20px;
+    margin-top: -10px;
+}
+
 /* responsive to mobile */
 
 @media screen and (max-width: 767px) {
-    #cadastro {
+    #cadastro,#login {
         width: 90vw;
         height: 80vh;
     }
-    #formExemplo{
+    #form-cadastro{
         overflow: auto;
     }
 }
