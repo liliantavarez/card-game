@@ -1,0 +1,6 @@
+[Bb]uild*
+[Dd]ist*
+[Bb]in*
+package-lock.json
+*.min.js
+*.handlebars
