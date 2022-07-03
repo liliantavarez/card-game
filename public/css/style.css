@@ -133,7 +133,7 @@ a:hover,
 }
 .card {
     margin: 50px auto;
-    max-width: 220px;
+    width: 220px;
 }
 .card > img {
     margin: 10px auto;
@@ -156,13 +156,13 @@ ul {
     font-size: 24px;
 }
 #btn-jogar {
-    margin: 0 20px;
     width: 242px;
     height: 64px;
 }
 .div2 {
     grid-area: 1 / 2 / 2 / 3;
 }
+.div1,
 .div2,
 .quadro-vitorias {
     display: flex;
