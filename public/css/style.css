@@ -1,7 +1,5 @@
 @import url(//db.onlinewebfonts.com/c/50cd2aad9c8f35800bb6beac3ad42f16?family=Azonix);
 
-
-
 html,
 body {
     width: 100vw;
@@ -10,21 +8,36 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #050213;
     
 }
+.color-gradient{
+    background: linear-gradient(274.17deg, #786db6 2.7%, rgba(163, 107, 201, 0.53) 116.24%);
+}
 
-.background {
-    width: 100vw;
-    height: 100vh;
-  }
-
-
+.icon{
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
 a{
     text-decoration: none;
-    color: white;
 }
-a:hover{
-    color: white;
+a, a:hover, .h3, .rec-senha{
+    color: whitesmoke;
+}
+.rec-senha{
+    background: #362C6D;
+    border: 1px solid #2C2F41;
+    border-radius: 5px;
+}
+.rec-senha:hover{
+    background: #786db6;
+    color: #000000;
+    border: none;
 }
 .btns{
     margin-top: 30px;
