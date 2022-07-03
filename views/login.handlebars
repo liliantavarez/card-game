@@ -1,5 +1,5 @@
     <main id="login" class="container text-center">
-        <div class="justify-content-center align-itens-center row">
+        <div class="justify-content-center align-itens-center row" id="conteiner-login">
             <form action="/cad" method="POST" form id="login" class="col-4">
                 <img class="my-5 mx-auto" src="/public/imgs/card-game-cards-hold-512.webp" alt="" width="72" height="69">
                 <h1 class="h3 mb-3 fw-normal">
@@ -14,7 +14,7 @@
                     <label for="floatingPassword">Senha</label>
                 </div>
                 
-                <button class="w-100 my-2 btn btn-dark btn-lg" name="btLogin" type="submit">Login</button> 
+                <button class="w-100 my-2 btn btn-dark btn-lg" name="btLogin" type="submit" id="btn-login">Login</button> 
 
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
@@ -25,7 +25,7 @@
                     </ul>
                 </nav>
                 
-                <button class="w-100 btn btn-dark btn-lg" name="cadastro" type="submit" ><a href="/cadastro">Criar nova conta</a></button>
+                <button class="w-100 btn btn-dark btn-lg" name="cadastro" type="submit" id="btn-criar-conta" ><a href="/cadastro">Criar nova conta</a></button>
                 
                
             </form>

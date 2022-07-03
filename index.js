@@ -5,6 +5,8 @@ const Sequelize = require("sequelize");
 const bodyParser = require("body-parser");
 const Post = require("./modelos/Post");
 const { transporter } = require("./modelos/sendMail");
+const bcrypt = require("bcrypt");
+
 
 //config
 //template engine
@@ -56,18 +58,19 @@ app.post("/recSenha", async function (req, res) {
     });
 });
 
-app.post("/cadastro", function (req, res) {
+app.post("/cadastro",  async function (req, res) {
+  const hash = await bcrypt.hash(req.body.senha,8);
   Post.create({
     nome: req.body.nome,
     email: req.body.email,
-    senha: req.body.senha,
+    senha: hash
   })
     .then(() => {
       res.redirect("/");
       // res.send("Cadastro inserido no banco de dados")
     })
     .catch((err) => {
-      res.send("Erro ao realizar cadastro", err);
+      res.status("Erro ao realizar cadastro").send(err);
     });
 
   // let cadastro ={
