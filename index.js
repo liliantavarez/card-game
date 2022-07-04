@@ -1,11 +1,11 @@
 const express = require("express");
 const { engine } = require("express-handlebars");
-
+const bcrypt = require("bcrypt")
 const app = express();
-const Sequelize = require("sequelize");
 const bodyParser = require("body-parser");
 const Post = require("./modelos/Post");
 const { transporter } = require("./modelos/sendMail");
+const crypto = require('crypto')
 
 // config
 // template engine
@@ -36,9 +36,30 @@ app.get("/perfil", (req, res) => {
     res.render("perfil");
 });
 
+
 app.post("/recSenha", async (req, res) => {
     const { emailRec } = req.body;
-    await Post.findOne({ where: { email: emailRec } })
+    try {
+        const user = await Post.findOne({emailRec});
+
+        if(!user)
+            return res.status(400).send({error:"usuario não encontrado"});
+
+        const token = crypto.randomBytes(20).toString('hex');
+
+        const agora = new Date();
+        agora.setHours(agora.getHours() + 1)
+        console.log(token,agora)
+        const usuario = await Post.findByPk(user.id);
+        usuario.senhaToken = token;
+        usuario.senhaTokenEspira = agora;
+        usuario.save();
+
+        
+    } catch (err) {
+        res.status(400).send({error: 'E-mail nao cadastrado'})
+    }
+    /*await Post.findOne({ where: { email: emailRec } })
         .then(date => {
             transporter.sendMail({
                 html: `<h3>Olá, ${date.nome}</h3>
@@ -52,14 +73,14 @@ app.post("/recSenha", async (req, res) => {
         })
         .catch(() => {
             res.send("E-mail nao cadastrado");
-        });
+        });*/
 });
 
 app.post("/cadastro", (req, res) => {
     Post.create({
         nome: req.body.nome,
         email: req.body.email,
-        senha: req.body.senha,
+        senha: req.body.senha
     })
         .then(() => {
             res.redirect("/");
