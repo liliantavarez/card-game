@@ -31,14 +31,12 @@ body {
 a {
     text-decoration: none;
 }
-a,
-a:hover,
-.btn:hover,
+a,a:hover,.btn:hover,
 .h3,
-.rec-senha,
 .color-text {
     color: whitesmoke;
 }
+
 .rec-senha {
     background: #362c6d;
     border: 1px solid #2c2f41;

@@ -1,12 +1,12 @@
+/* eslint-disable consistent-return */
 const express = require("express");
 const { engine } = require("express-handlebars");
+
 const app = express();
 const bodyParser = require("body-parser");
+const crypto = require("crypto");
 const Post = require("./modelos/Post");
-const transporter  = require("./modelos/sendMail");
-const crypto = require('crypto');
-
-
+const transporter = require("./modelos/sendMail");
 
 // config
 // template engine
@@ -33,75 +33,88 @@ app.get("/recSenha", (req, res) => {
     res.render("recSenha");
 });
 
+app.get("/novaSenha", (req, res) => {
+    res.render("novaSenha");
+});
+
 app.get("/perfil", (req, res) => {
     res.render("perfil");
 });
 
-
 app.post("/recSenha", async (req, res) => {
     const { emailRec } = req.body;
     try {
-        const user = await Post.findOne({emailRec});
+        const user = await Post.findOne({ where: { email: emailRec } });
+        if (!user) {
+            return res.status(400).send({ error: "usuario não encontrado" });
+        }
 
-        if(!user)
-            return res.status(400).send({error:"usuario não encontrado"});
-
-        const token = crypto.randomBytes(20).toString('hex');
+        const token = crypto.randomBytes(20).toString("hex");
 
         const agora = new Date();
-        agora.setHours(agora.getHours() + 1)
-        console.log(token,agora)
+        agora.setHours(agora.getHours() + 1);
         const usuario = await Post.findByPk(user.id);
         usuario.senhaToken = token;
         usuario.senhaTokenEspira = agora;
         usuario.save();
 
-        transporter.sendMail({
-            to: emailRec,
-            from: "Card Game <recsenhacardgame@gmail.com>",
-            text: token,
-        },(err) =>{
-            if(err)
-                return res.status(400).send({error: 'email não encontrado'});
-            return res.send();  
-        });
-        
+        transporter.sendMail(
+            {
+                to: emailRec,
+                from: "Card Game <recsenhacardgame@gmail.com>",
+                text: token,
+            },
+            err => {
+                if (err) {
+                    return res
+                        .status(400)
+                        .send({ error: "email não encontrado" });
+                }
+            },
+        );
+        res.redirect("/novaSenha");
     } catch (err) {
-        res.status(400).send({error: 'E-mail nao cadastrado'})
+        res.status(400).send({ error: "E-mail nao cadastrado" });
     }
-
-    
 });
-app.post("/resetSenha", async(req, res)=> {
-    const {email, senha, senhaToken} = req.body;
+
+app.post("/novaSenha", async (req, res) => {
+    const email = req.body.emailRec;
+    const senhaToken = req.body.inputToken;
+    const senha = req.body.inputPassword;
 
     try {
-        const user = await Post.findOne({email})
+        const user = await Post.findOne({ where: { email } });
+        if (!user) {
+            return res.status(400).send({ error: "usuario não encontrado" });
+        }
 
-        if(!user)
-            return res.status(400).send({error:"usuario não encontrado"});
-
-        if(senhaToken !== user.senhaToken)
-            return res.status(400).send({error:'token incorreto'})
+        if (senhaToken !== user.senhaToken) {
+            return res.status(400).send({ error: "token incorreto" });
+        }
 
         const agora = new Date();
-        
-        if(agora > user.senhaTokenEspira)   
-            return res.status(400).send({error: 'token inspirado, gere um novo'}) 
+
+        if (agora > user.senhaTokenEspira) {
+            return res
+                .status(400)
+                .send({ error: "token inspirado, gere um novo" });
+        }
 
         const novaSenha = await Post.findByPk(user.id);
         novaSenha.senha = senha;
         await novaSenha.save();
-        res.send();
+        res.redirect("/");
     } catch (err) {
-        res.status(400).send({error: 'falha ao resetar, tente novamente'})
+        res.status(400).send({ error: "falha ao resetar, tente novamente" });
     }
-})
+});
+
 app.post("/cadastro", (req, res) => {
     Post.create({
         nome: req.body.nome,
         email: req.body.email,
-        senha: req.body.senha
+        senha: req.body.senha,
     })
         .then(() => {
             res.redirect("/");
