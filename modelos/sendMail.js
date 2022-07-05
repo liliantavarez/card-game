@@ -13,18 +13,15 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// envio
-// async function run(){
-//   const sendMail = await transporter.sendMail({
-//     text: "Sua senha",
-//     subject: 'Email de recuperação de senha',
-//     from: "Card game <recsenhacardgame@gmail.com>",
-//     to:  "liliancarvalhotavares@gmail.com"
-//   })
-// }
 
-// run();
 
-module.exports = {
-    transporter,
-};
+/*transporter.use('compile', hbs({
+    viewEngine: 'handlebars',
+    viewPath: path.resolve('./public/mail/senhaRec/'),
+    extName:'.html'
+}));*/
+
+
+
+
+module.exports = transporter;
