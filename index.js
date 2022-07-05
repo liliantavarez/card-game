@@ -1,11 +1,12 @@
 const express = require("express");
 const { engine } = require("express-handlebars");
-const bcrypt = require("bcrypt")
 const app = express();
 const bodyParser = require("body-parser");
 const Post = require("./modelos/Post");
-const { transporter } = require("./modelos/sendMail");
-const crypto = require('crypto')
+const transporter  = require("./modelos/sendMail");
+const crypto = require('crypto');
+
+
 
 // config
 // template engine
@@ -55,27 +56,47 @@ app.post("/recSenha", async (req, res) => {
         usuario.senhaTokenEspira = agora;
         usuario.save();
 
+        transporter.sendMail({
+            to: emailRec,
+            from: "Card Game <recsenhacardgame@gmail.com>",
+            text: token,
+        },(err) =>{
+            if(err)
+                return res.status(400).send({error: 'email não encontrado'});
+            return res.send();  
+        });
         
     } catch (err) {
         res.status(400).send({error: 'E-mail nao cadastrado'})
     }
-    /*await Post.findOne({ where: { email: emailRec } })
-        .then(date => {
-            transporter.sendMail({
-                html: `<h3>Olá, ${date.nome}</h3>
-      <p>Essa é sua senha de acesso: ${date.senha}`,
-                subject: "Senha de acesso CardGame",
-                from: "Card Game <recsenhacardgame@gmail.com>",
-                to: date.email,
-            });
-            res.redirect("/recSenha");
-            // res.send("E-mail enviado com sucesso!")
-        })
-        .catch(() => {
-            res.send("E-mail nao cadastrado");
-        });*/
-});
 
+    
+});
+app.post("/resetSenha", async(req, res)=> {
+    const {email, senha, senhaToken} = req.body;
+
+    try {
+        const user = await Post.findOne({email})
+
+        if(!user)
+            return res.status(400).send({error:"usuario não encontrado"});
+
+        if(senhaToken !== user.senhaToken)
+            return res.status(400).send({error:'token incorreto'})
+
+        const agora = new Date();
+        
+        if(agora > user.senhaTokenEspira)   
+            return res.status(400).send({error: 'token inspirado, gere um novo'}) 
+
+        const novaSenha = await Post.findByPk(user.id);
+        novaSenha.senha = senha;
+        await novaSenha.save();
+        res.send();
+    } catch (err) {
+        res.status(400).send({error: 'falha ao resetar, tente novamente'})
+    }
+})
 app.post("/cadastro", (req, res) => {
     Post.create({
         nome: req.body.nome,
