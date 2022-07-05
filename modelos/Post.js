@@ -11,8 +11,7 @@ const Post = db.sequelize.define("cadastros", {
         type: db.Sequelize.STRING,
     },
     senhaToken: {
-        type: db.Sequelize.STRING,
-        
+        type: db.Sequelize.STRING,        
     },
     senhaTokenEspira: {
         type: db.Sequelize.DATE,
