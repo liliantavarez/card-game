@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -12,10 +13,10 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-/* transporter.use('compile', hbs({
+/*transporter.use('compile', hbs({
     viewEngine: 'handlebars',
     viewPath: path.resolve('./public/mail/senhaRec/'),
     extName:'.html'
-})); */
+}));*/
 
 module.exports = transporter;
