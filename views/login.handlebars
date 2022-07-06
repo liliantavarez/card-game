@@ -1,23 +1,32 @@
 <main id="login" class="container text-center">
     <div class="justify-content-center align-itens-center row" id="conteiner-login">
-        <form action="/cad" method="POST" form id="login" class="col-4">
+        <form action="/" method="POST" role="form" id="login" class="col-4">
             <div class="color-gradient icon">
                 <img class="mx-auto" src="/public/imgs/card-game-cards-hold-512.webp" alt="" width="72" height="69">
             </div>
-            <h1 class="h3 mt-5 mb-3 fw-normal">
+            <h1 class="h3 mt-5 mb-5 fw-normal">
                 Informações de login
             </h1>
+
+            {{#if message}}
+            <p class="alert alert-danger">{{message}}</p>
+            {{/if}}
+
+
             <div class="form-floating">
-                <input type="email" class="my-2 form-control" id="floatingInput" placeholder="name@exemple.com">
+                <input type="email" class="mt-5 form-control" name="email" id="floatingInput"
+                    placeholder="name@exemple.com">
                 <label for="floatingInput">Email</label>
             </div>
             <div class="form-floating">
-                <input type="password" placeholder="Senha" class="my-2 form-control" id="floatingPassword">
+                <input type="password" placeholder="Senha" class="my-2 form-control" name="senha" id="floatingPassword">
                 <label for="floatingPassword">Senha</label>
             </div>
 
 
-            <button class="w-100 my-2 btn color-gradient color-text btn-lg" name="btLogin" type="submit">Login</button>
+            <button class="w-100 my-2 btn color-gradient color-text btn-lg" onclick="login()" id="btLogin"
+                type="submit">
+                Login</button>
 
 
             <nav aria-label="Page navigation example">
@@ -29,15 +38,16 @@
                 </ul>
             </nav>
 
-            
-                <button class="w-100 btn my-2 color-gradient btn-lg" name="cadastro" type="submit">
-                    <a id="linkCadastro" href="/cadastro">
+
+            <button class="w-100 btn my-2 color-gradient btn-lg" name="cadastro" type="submit">
+                <a id="linkCadastro" href="/cadastro">
                     Criar nova conta
-                    </a>
-                </button>
+                </a>
+            </button>
             </a>
 
 
         </form>
     </div>
+
 </main>
