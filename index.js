@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const recSenhaRoute = require("./routes/recSenha");
 const cadastroRoute = require("./routes/cadastro");
 const novaSenhaRoute = require("./routes/novaSenha");
-const Post = require("./modelos/Post");
+const modelDataBase = require("./database/dataBaseModel");
 
 // config
 // template engine
@@ -38,8 +38,8 @@ app.get("/perfil", (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-    const user = await Post.findOne({ where: { email: req.body.email } });
-
+    const user = await modelDataBase.findOne({ where: { email: req.body.email } });
+    
     if (req.body.email === "" || req.body.senha === "") {
         res.render("login", { message: "Informe E-mail e senha de acesso!" });
     } else {

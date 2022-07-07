@@ -1,4 +1,4 @@
-const db = require("./db");
+const db = require("./config");
 
 const Post = db.sequelize.define("cadastros", {
     nome: {
