@@ -1,6 +1,14 @@
 @import url(//db.onlinewebfonts.com/c/50cd2aad9c8f35800bb6beac3ad42f16?family=Azonix);
 /* Icone */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
+input[type="number"] {
+    -moz-appearance: textfield;
+}
 html,
 body {
     width: 100vw;
@@ -31,7 +39,9 @@ body {
 a {
     text-decoration: none;
 }
-a,a:hover,.btn:hover,
+a,
+a:hover,
+.btn:hover,
 .h3,
 .color-text {
     color: whitesmoke;
@@ -52,7 +62,9 @@ a,a:hover,.btn:hover,
     justify-content: space-around;
     margin-top: 30px;
 }
-
+.alert {
+    display: inline;
+}
 #cadastro {
     padding: 30px;
     border-radius: 3px;
@@ -128,9 +140,51 @@ a,a:hover,.btn:hover,
     margin-top: 40px;
     font-size: 24px;
 }
+
+.cards,
+.card-footer,
+.card-body,
+.card-header {
+    width: 100%;
+}
+.cards {
+    height: 100%;
+}
 .card {
     margin: 50px auto;
     width: 220px;
+    height: 490px;
+    margin: 10px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    overflow-y: auto;
+}
+.card_front {
+    /* transform: rotateY(180deg); */
+}
+.card_back {
+    background: rgb(55, 14, 69);
+    background: radial-gradient(
+        circle,
+        rgba(55, 14, 69, 1) 38%,
+        rgba(101, 61, 121, 1) 81%,
+        rgba(168, 116, 194, 1) 100%
+    );
+}
+
+.card_front,
+.card_back {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.45);
+    backface-visibility: hidden;
+}
+.flip {
+    transform: rotateY(180deg);
 }
 .card > img {
     margin: 10px auto;
@@ -138,12 +192,46 @@ a,a:hover,.btn:hover,
     height: 100px;
     background-color: #2c2f41;
 }
+#onDeckCards {
+}
+.inputCard {
+    width: 35px;
+    height: 35px;
+    margin-left: 25%;
+}
+.inputCard > input {
+    font-size: 14px;
+    padding: 3px;
+    margin-right: 10px;
+}
+
 ul {
     padding: 0;
 }
-.atributos {
+
+.imgCheck,
+.imgCross {
+    filter: grayscale(100%);
+}
+.btCheck,
+.btCross {
+    border: none;
+}
+.atributos,
+.input-icons,
+.card-footer {
     display: flex;
     justify-content: space-between;
+}
+.inputs {
+    display: inherit;
+}
+.input-icons {
+    flex-direction: column;
+}
+.atributos {
+    font-size: 24px;
+    margin: 10px 0;
 }
 .div1 > h3 {
     text-align: center;
@@ -205,7 +293,6 @@ ul {
     background: #362c6d;
     border: 1px solid #2c2f41;
     border-radius: 12px;
-    margin-right: 25px;
 }
 #perfil-feedback > img {
     width: 70px;
@@ -227,9 +314,52 @@ ul {
     padding: 20px 30px;
     width: 100%;
     height: 100%;
+    overflow-y: auto;
 }
 #sobre > h4 {
     margin-bottom: 40px;
+}
+
+#deckCards {
+    background-color: #38284088;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transition: 400ms;
+}
+#btnVolatDeck {
+    margin: 0 10px 10px auto;
+}
+#perfil {
+    width: 100vw;
+    height: 100vh;
+}
+#deckCards.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+#deckCards.addScroll {
+    overflow-y: auto;
+}
+body.hideScroll {
+    overflow-y: hidden;
+}
+.parent.hideScroll {
+    overflow-y: hidden;
+}
+#deckCards .content h1 {
+    text-align: center;
+
+    text-transform: uppercase;
 }
 
 /* responsive to mobile */
