@@ -52,9 +52,9 @@ function onOff(id) {
 function totalValor(valorTotal, valorAtt) {
     const att = valorAtt;
     let total = valorTotal;
-    if (att.value < valorTotal) {
+    if (att.value < total) {
         total -= att.value;
-        document.getElementById("total").placeholder = valorTotal;
+        document.getElementById("total").placeholder = total;
         att.disabled = "true";
     }
 }
