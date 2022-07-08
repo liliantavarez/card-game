@@ -21,7 +21,8 @@ function ativaCross(index) {
 }
 
 function desativaCross(index) {
-    document.getElementsByClassName("imgCross")[index].style.filter = "grayscale(100%)";
+    document.getElementsByClassName("imgCross")[index].style.filter
+        = "grayscale(100%)";
     document.getElementsByClassName("btCross")[index].disabled = true;
 }
 
@@ -31,7 +32,8 @@ function ativaCheck(index) {
 }
 
 function desativaCheck(index) {
-    document.getElementsByClassName("imgCheck")[index].style.filter = "grayscale(100%)";
+    document.getElementsByClassName("imgCheck")[index].style.filter
+        = "grayscale(100%)";
     document.getElementsByClassName("btCheck")[index].disabled = true;
 }
 
@@ -45,5 +47,36 @@ function onOff(id) {
     } else if (id === "quantAtaq") {
         desativaCross(0);
         ativaCheck(0);
+    }
+}
+function totalValor(valorTotal, valorAtt) {
+    const att = valorAtt;
+    let total = valorTotal;
+    if (att.value < valorTotal) {
+        total -= att.value;
+        document.getElementById("total").placeholder = valorTotal;
+        att.disabled = "true";
+    }
+}
+function check(id) {
+    const valorTotal = parseInt(
+        document.getElementById("total").placeholder,
+        10,
+    );
+    if (id === "btCheckMag") {
+        const valorMag = document.getElementById("quantMag");
+        totalValor(valorTotal, valorMag);
+        desativaCheck(2);
+        ativaCross(2);
+    } else if (id === "btCheckDef") {
+        const valorDef = document.getElementById("quantDef");
+        totalValor(valorTotal, valorDef);
+        desativaCheck(1);
+        ativaCross(1);
+    } else if (id === "btCheckAtaq") {
+        const valorAtaq = document.getElementById("quantAtaq");
+        totalValor(valorTotal, valorAtaq);
+        desativaCheck(0);
+        ativaCross(0);
     }
 }
