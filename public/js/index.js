@@ -80,3 +80,33 @@ function check(id) {
         ativaCross(0);
     }
 }
+
+function removerAtt(valorTotal, valorAtt) {
+    const att = valorAtt;
+    let novoValor = "";
+    novoValor = valorTotal + parseInt(att.value, 10);
+    document.getElementById("total").placeholder = novoValor;
+    att.value = 0;
+    att.disabled = false;
+}
+
+function cross(id) {
+    const valorTotal = parseInt(document.getElementById("total").placeholder, 10);
+
+    if (id === "btCrossMag") {
+        const valorMag = document.getElementById("quantMag");
+        removerAtt(valorTotal, valorMag);
+        desativaCheck(2);
+        desativaCross(2);
+    } else if (id === "btCrossDef") {
+        const valorDef = document.getElementById("quantDef");
+        removerAtt(valorTotal, valorDef);
+        desativaCheck(1);
+        ativaCross(1);
+    } else if (id === "btCrossAtaq") {
+        const valorAtaq = document.getElementById("quantAtaq");
+        removerAtt(valorTotal, valorAtaq);
+        desativaCheck(0);
+        ativaCross(0);
+    }
+}
