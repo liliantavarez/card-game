@@ -86,7 +86,7 @@ function removerAtt(valorTotal, valorAtt) {
     let novoValor = "";
     novoValor = valorTotal + parseInt(att.value, 10);
     document.getElementById("total").placeholder = novoValor;
-    att.value = 0;
+    att.value = "";
     att.disabled = false;
 }
 
