@@ -18,7 +18,7 @@ router.post("/cadastro", (req, res) => {
             res.redirect("/");
         })
         .catch(err => {
-            res.send("Erro ao realizar cadastro", err);
+            res.send(err);
         });
 });
 module.exports = router;
