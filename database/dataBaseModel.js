@@ -17,8 +17,29 @@ const Post = db.sequelize.define("cadastros", {
         type: db.Sequelize.DATE,
     },
 });
+const PostInfos = db.sequelize.define("perfilinfos", {
+    email: {
+        type: db.Sequelize.STRING,
+    },
+    vitorias: {
+        type: db.Sequelize.STRING,
+    },
+    cartas: {
+        type: db.Sequelize.STRING,
+    },
+    historico: {
+        type: db.Sequelize.STRING,
+    },
+    imagem: {
+        type: db.Sequelize.STRING,
+    },
+});
 
 // Recriando tabela
-// Post.sync({force:true})
+// Post.sync({ force: true });
+// PostInfos.sync({ force: true });
 
-module.exports = Post;
+module.exports = {
+    Post,
+    PostInfos,
+};
