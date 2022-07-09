@@ -1,5 +1,5 @@
 const express = require("express");
-const Post = require("../modelos/Post");
+const Post = require("../database/dataBaseModel");
 
 const router = express.Router();
 
@@ -18,7 +18,7 @@ router.post("/cadastro", (req, res) => {
             res.redirect("/");
         })
         .catch(err => {
-            res.send("Erro ao realizar cadastro", err);
+            res.send(err);
         });
 });
 module.exports = router;

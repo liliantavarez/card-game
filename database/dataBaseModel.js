@@ -1,4 +1,4 @@
-const db = require("./db");
+const db = require("./config");
 
 const Post = db.sequelize.define("cadastros", {
     nome: {
@@ -11,15 +11,14 @@ const Post = db.sequelize.define("cadastros", {
         type: db.Sequelize.STRING,
     },
     senhaToken: {
-        type: db.Sequelize.STRING,        
+        type: db.Sequelize.STRING,
     },
     senhaTokenEspira: {
         type: db.Sequelize.DATE,
-        
     },
 });
 
-//Recriando tabela
-//Post.sync({force:true})
+// Recriando tabela
+// Post.sync({force:true})
 
 module.exports = Post;

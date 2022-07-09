@@ -1,5 +1,19 @@
 # Card Game 🕹🃏
 
+### Deploy da aplicação: [Card Game](https://mysql-cardgame.herokuapp.com/)
+
+## 🚀 Tecnologias
+- ⚡ Express — A web framework for Node.js
+- 💾 Sequelize — SQL dialect ORM for Node.js
+## ✋🏻 Pré-requisitos
+- Node.js
+## 🔥 Instalação e execução
+1. Faça um clone desse repositório;
+2. Entre na pasta `cd card-game`;
+3. Rode `npm install`  para instalar as dependências;
+4. Use `node index` para rodar a aplicação;
+
+
 Projeto em desenvolvimento nas disciplinas de gerenciamento de projetos e engenharia de software
 
 ![01](https://user-images.githubusercontent.com/51184806/177060216-9e50f749-6a85-4587-a81c-c14b77943841.png)

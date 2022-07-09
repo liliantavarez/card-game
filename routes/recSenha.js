@@ -2,7 +2,7 @@
 const express = require("express");
 const crypto = require("crypto");
 const transporter = require("../modelos/sendMail");
-const Post = require("../modelos/Post");
+const Post = require("../database/dataBaseModel");
 
 const router = express.Router();
 
