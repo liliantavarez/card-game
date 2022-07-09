@@ -1,3 +1,4 @@
+/* eslint-disable no-lonely-if */
 /* eslint-disable consistent-return */
 const express = require("express");
 const { engine } = require("express-handlebars");
@@ -7,7 +8,7 @@ const bodyParser = require("body-parser");
 const recSenhaRoute = require("./routes/recSenha");
 const cadastroRoute = require("./routes/cadastro");
 const novaSenhaRoute = require("./routes/novaSenha");
-
+const modelDataBase = require("./database/dataBaseModel");
 
 // config
 // template engine
@@ -27,13 +28,30 @@ app.use("/", recSenhaRoute);
 app.use("/", cadastroRoute);
 app.use("/", novaSenhaRoute);
 
-
 app.get("/", (req, res) => {
     res.render("login");
 });
 
 app.get("/perfil", (req, res) => {
     res.render("perfil");
+    console.log(req);
+});
+
+app.post("/", async (req, res) => {
+    const user = await modelDataBase.findOne({ where: { email: req.body.email } });
+    
+    if (req.body.email === "" || req.body.senha === "") {
+        res.render("login", { message: "Informe E-mail e senha de acesso!" });
+    } else {
+        if (!user) {
+            res.render("login", { message: "E-mail não cadastrado" });
+        } else if (user.senha !== req.body.senha) {
+            res.render("login", { message: "Senha incorreta" });
+        } else {
+            res.redirect("/perfil");
+            return user.id;
+        }
+    }
 });
 
 app.listen(process.env.PORT || 8081, () => {

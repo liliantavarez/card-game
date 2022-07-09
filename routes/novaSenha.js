@@ -2,7 +2,7 @@
 /* eslint-disable import/newline-after-import */
 const express = require("express");
 const router = express.Router();
-const Post = require("../modelos/Post");
+const Post = require("../database/dataBaseModel");
 
 router.get("/novaSenha", (req, res) => {
     res.render("novaSenha");

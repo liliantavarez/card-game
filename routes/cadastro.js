@@ -1,5 +1,5 @@
 const express = require("express");
-const Post = require("../modelos/Post");
+const Post = require("../database/dataBaseModel");
 
 const router = express.Router();
 

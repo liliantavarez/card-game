@@ -62,7 +62,8 @@ a:hover,
     justify-content: space-around;
     margin-top: 30px;
 }
-.alert {
+
+.alert{
     display: inline;
 }
 #cadastro {
