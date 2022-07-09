@@ -36,7 +36,7 @@ app.get("/perfil", (req, res) => {
     res.render("perfil");
 });
 
-app.listen(8081, () => {
+app.listen(process.env.PORT || 8081, () => {
     console.log("servidor rodando localhost:8081");
 });
 // localhost:8081
