@@ -8,7 +8,10 @@ const bodyParser = require("body-parser");
 const recSenhaRoute = require("./routes/recSenha");
 const cadastroRoute = require("./routes/cadastro");
 const novaSenhaRoute = require("./routes/novaSenha");
+const PerfilRooute = require('./routes/perfil')
 const modelDataBase = require("./database/dataBaseModel");
+const Post = require("./database/dataBaseModel");
+
 
 // config
 // template engine
@@ -27,18 +30,18 @@ app.use(bodyParser.json());
 app.use("/", recSenhaRoute);
 app.use("/", cadastroRoute);
 app.use("/", novaSenhaRoute);
+app.use("/", PerfilRooute);
 
 app.get("/", (req, res) => {
     res.render("login");
 });
 
-app.get("/perfil", (req, res) => {
+/*app.get("/perfil", (req, res) => {
     res.render("perfil");
-    console.log(req);
-});
+});*/
 
 app.post("/", async (req, res) => {
-    const user = await modelDataBase.findOne({ where: { email: req.body.email } });
+    const user = await Post.findOne({ where: { email: req.body.email } });
     
     if (req.body.email === "" || req.body.senha === "") {
         res.render("login", { message: "Informe E-mail e senha de acesso!" });

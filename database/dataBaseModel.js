@@ -1,4 +1,6 @@
 const db = require("./config");
+const PerfilInfo = require('./databaseModelPerfil')
+
 
 const Post = db.sequelize.define("cadastros", {
     nome: {
@@ -6,6 +8,7 @@ const Post = db.sequelize.define("cadastros", {
     },
     email: {
         type: db.Sequelize.STRING,
+        primaryKey: true
     },
     senha: {
         type: db.Sequelize.STRING,
@@ -19,7 +22,13 @@ const Post = db.sequelize.define("cadastros", {
     },
 });
 
+Post.hasOne(PerfilInfo, {
+    foreignKey: 'email_cadastro'
+});
+
 //Recriando tabela
-//Post.sync({force:true})
+//db.sequelize.sync({force: true})
 
 module.exports = Post;
+
+
