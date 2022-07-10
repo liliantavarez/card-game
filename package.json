@@ -4,6 +4,7 @@
     "description": "Jogo de cartas",
     "main": "index.js",
     "scripts": {
+        "start": "node index",
         "prettier": "npx prettier --write --ignore-unknown ."
     },
     "dependencies": {
