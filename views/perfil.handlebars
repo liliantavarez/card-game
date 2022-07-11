@@ -1,4 +1,4 @@
-<div class="parent">
+<form id="form-perfil" action="/perfil" method="GET" role="form" class="parent">
     <div class="div1">
         <div class="name-icon">
             <img id="icon-game" src="../public/imgs/icon-game.png" alt="">
@@ -15,7 +15,7 @@
                 <a id="page-config" class="text-color" href="">Configurações</a>
             </div>
         </div>
-        <div class="card  text-center">
+        <div id="cardFav" class="card  text-center">
             <img class="card-img-top" id="imd-card"
                 src="https://greenpng.com/wp-content/uploads/2020/06/untitleddesign_1_original-103-300x300.png" alt="">
             <div class="card-header">
@@ -24,11 +24,11 @@
             <div class="card-body">
                 <div class="card-text">
                     <ul>
-                        <li class="atributos">Atributo 1 <p class="valores" id="valor-att1">10</p>
+                        <li class="atributos">Ataque<p class="valores" id="valor-att1">10</p>
                         </li>
-                        <li class="atributos">Atributo 2 <p class="valores" id="valor-att2">10</p>
+                        <li class="atributos">Defesa<p class="valores" id="valor-att2">10</p>
                         </li>
-                        <li class="atributos">Atributo 3 <p class="valores" id="valor-att3">10</p>
+                        <li class="atributos">Magia<p class="valores" id="valor-att3">10</p>
                         </li>
                     </ul>
                 </div>
@@ -36,6 +36,7 @@
         </div>
         <h3 class="color-text">Carta Favorita</h3>
     </div>
+
     <div class="div2">
         <div class="img-perfil">
             <img src="../public/imgs/icon-perfil.png" alt="">
@@ -47,6 +48,7 @@
         </div>
         <button id="btn-MudarImagem" class="btn color-gradient color-text">Mudar Imagem</button>
     </div>
+
     <div class="div3">
         <section id="perfil-feedback">
             <button id="bt-feedback" class="color-text">FeedBack</button>
@@ -71,105 +73,98 @@
             </div>
         </section>
     </div>
+</form>
 
-    <div id="deckCards" class="hide">
-        <div class="cards">
-            <div class="card card_front text-center">
 
-                <img id="preview" class="card-img-top"
-                    src="https://www.odetelis.com/media//colorselectorplus/swatches/209.jpg">
-                <label for="fupload" class="btn btn-dark control-label label-bordered">Imagem</label>
-                <input style="display:none" type="file" id="fupload" name="fupload" class="fupload form-control">
+<div id="deckCards" class="hide" id="form-cadastro" action="/cadastro" method="POST" data-toggle="validator" role="form">
+    <div class="cards">
+        <div id="card1" class="card card_front text-center">
 
-                <div class="card-header">
-                    <input type="text" placeholder="Nome da Carta">
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <label for="floatingInput">Valor total: </label>
-                        <input type="number" id="total" placeholder="150" style="width:35px; height:35px;" disabled="">
+            <img id="preview" class="card-img-top"
+                src="https://www.odetelis.com/media//colorselectorplus/swatches/209.jpg">
+            <label for="fupload" class="btn btn-dark control-label label-bordered">Imagem</label>
+            <input style="display:none" type="file" id="fupload" name="fupload" class="fupload form-control">
 
-                        <ul class=" list-atributos">
-                            <li class="atributos">Ataque
-                                <input class="inputCard" onclick="onOff(id)" type="number" id="quantAtaq"
-                                    name="quantAtaq" min="1" max="150">
-                                <div class="input-icons" id="check-cross">
+            <div class="card-header">
+                <input type="text" placeholder="Nome da Carta">
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    <label for="floatingInput">Valor total: </label>
+                    <input type="number" id="total" placeholder="150" style="width:35px; height:35px;" disabled="">
 
-                                    <button class="btCheck" onclick="check(id)" id="btCheckAtaq" type="submit"
-                                        disabled="">
-                                        <img class="imgCheck" src="/public/imgs/check.ico"
-                                            style="max-widht:15px; max-height:15px;" alt="">
-                                    </button>
+                    <ul class=" list-atributos">
+                        <li class="atributos">Ataque
+                            <input class="inputCard" onclick="onOff(id)" type="number" id="quantAtaq" name="quantAtaq"
+                                min="1" max="150">
+                            <div class="input-icons" id="check-cross">
 
-                                    <button class="btCross" id="btCrossAtaq" onclick="cross(id)" type="submit"
-                                        disabled="">
-                                        <img class="imgCross" src="/public/imgs/cross.png"
-                                            style="max-widht:15px; max-height:15px;" alt="">
-                                    </button>
+                                <button class="btCheck" onclick="check(id)" id="btCheckAtaq" type="submit" disabled="">
+                                    <img class="imgCheck" src="/public/imgs/check.ico"
+                                        style="max-widht:15px; max-height:15px;" alt="">
+                                </button>
 
-                                </div>
+                                <button class="btCross" id="btCrossAtaq" onclick="cross(id)" type="submit" disabled="">
+                                    <img class="imgCross" src="/public/imgs/cross.png"
+                                        style="max-widht:15px; max-height:15px;" alt="">
+                                </button>
 
-                            </li>
+                            </div>
 
-                            <li class="atributos">Defesa
-                                <input class="inputCard" type="number" onclick="onOff(id)" id="quantDef" name="quantDef"
-                                    min="1" max="150">
+                        </li>
 
-                                <div class="input-icons" id="check-cross">
+                        <li class="atributos">Defesa
+                            <input class="inputCard" type="number" onclick="onOff(id)" id="quantDef" name="quantDef"
+                                min="1" max="150">
 
-                                    <button disabled="true" class="btCheck" id="btCheckDef" onclick="check(id)"
-                                        type="submit">
-                                        <img class="imgCheck" src="/public/imgs/check.ico"
-                                            style="max-widht:15px; max-height:15px;" alt="">
-                                    </button>
+                            <div class="input-icons" id="check-cross">
 
-                                    <button class="btCross" id="btCrossDef" onclick="cross(id)" type="submit"
-                                        disabled="">
-                                        <img class="imgCross" src="/public/imgs/cross.png"
-                                            style="max-widht:15px; max-height:15px;" alt="">
-                                    </button>
+                                <button disabled="true" class="btCheck" id="btCheckDef" onclick="check(id)"
+                                    type="submit">
+                                    <img class="imgCheck" src="/public/imgs/check.ico"
+                                        style="max-widht:15px; max-height:15px;" alt="">
+                                </button>
 
-                                </div>
-                            </li>
+                                <button class="btCross" id="btCrossDef" onclick="cross(id)" type="submit" disabled="">
+                                    <img class="imgCross" src="/public/imgs/cross.png"
+                                        style="max-widht:15px; max-height:15px;" alt="">
+                                </button>
 
-                            <li class="atributos">Mágia
-                                <input class="inputCard" type="number" onclick="onOff(id)" id="quantMag" name="quantMag"
-                                    min="1" max="150">
+                            </div>
+                        </li>
 
-                                <div class="input-icons" id="check-cross">
-                                    <button class="btCheck" id="btCheckMag" onclick="check(id)" type="submit"
-                                        disabled="">
-                                        <img class="imgCheck" src="/public/imgs/check.ico"
-                                            style="max-widht:15px; max-height:15px;" alt="">
-                                    </button>
+                        <li class="atributos">Mágia
+                            <input class="inputCard" type="number" onclick="onOff(id)" id="quantMag" name="quantMag"
+                                min="1" max="150">
 
-                                    <button class="btCross" id="btCrossMag" onclick="cross(id)" type="submit"
-                                        disabled="">
-                                        <img class="imgCross" src="/public/imgs/cross.png"
-                                            style="max-widht:15px; max-height:15px;" alt="">
-                                    </button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-footer mb-2">
-                    <button class="btn color-gradient color-text" disabled="">Salvar</button>
-                    <button class="btn color-gradient color-text" disabled="">Excluir</button>
+                            <div class="input-icons" id="check-cross">
+                                <button class="btCheck" id="btCheckMag" onclick="check(id)" type="submit" disabled="">
+                                    <img class="imgCheck" src="/public/imgs/check.ico"
+                                        style="max-widht:15px; max-height:15px;" alt="">
+                                </button>
+
+                                <button class="btCross" id="btCrossMag" onclick="cross(id)" type="submit" disabled="">
+                                    <img class="imgCross" src="/public/imgs/cross.png"
+                                        style="max-widht:15px; max-height:15px;" alt="">
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
-            {{!-- <div class="card card_back"></div> --}}
-
+            <div class="card-footer mb-2">
+                <button class="btn color-gradient color-text" disabled="">Salvar</button>
+                <button class="btn color-gradient color-text" disabled="">Excluir</button>
+            </div>
         </div>
-        <button class="btn color-gradient color-text" id="btnVolatDeck" onclick="onOffDeckCards()">Voltar</button>
+
+        {{!-- <div class="card card_back"></div> --}}
+
     </div>
+    <button class="btn color-gradient color-text" id="btnVolatDeck" onclick="onOffDeckCards()">Voltar</button>
 </div>
+
 <div class="sobrepor">
     <img class="arrow" id="left" src="/public/imgs/giphy.gif" alt="This will display an animated GIF" />
     <img class="arrow" id="right" src="/public/imgs/giphy.gif" alt="This will display an animated GIF" />
-    </figure>
-</div>
-
-
 </div>
