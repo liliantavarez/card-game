@@ -174,7 +174,6 @@ a:hover,
     width: 260px;
     height: 490px;
     margin: 10px;
-    position: relative;
     transform-style: preserve-3d;
     transition: transform 0.5s;
     overflow-y: auto;
@@ -197,8 +196,6 @@ a:hover,
 .card_front,
 .card_back {
     display: flex;
-    position: absolute;
-    justify-content: center;
     align-items: center;
     border-radius: 20px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.45);
@@ -385,6 +382,27 @@ ul {
     transition: 400ms;
 }
 
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+#card1 {
+    grid-area: 1 / 1 / 2 / 2;
+}
+#card2 {
+    grid-area: 1 / 2 / 2 / 3;
+}
+#card3 {
+    grid-area: 1 / 3 / 2 / 4;
+}
+#card4 {
+    grid-area: 1 / 4 / 2 / 5;
+}
+
 #btnVolatDeck {
     margin: 0 10px 10px auto;
 }
@@ -417,9 +435,79 @@ body.hideScroll {
     text-transform: uppercase;
 }
 
+/* responsive to tablet */
+
+@media screen and (min-width: 717px) and (max-width: 1023px) {
+    .parent {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 30px;
+    }
+
+    .div1 {
+        grid-area: 1 / 1 / 2 / 2;
+    }
+    .div2 {
+        grid-area: 1 / 2 / 2 / 3;
+    }
+    .div3 {
+        grid-area: 2 / 1 / 3 / 3;
+        flex-direction: column-reverse;
+    }
+
+    #deckCards {
+        padding: 10px;
+    }
+    .card {
+        margin: 10px;
+        width: 250px;
+        height: 400px;
+    }
+    #cardFav {
+        width: 200px;
+        height: 300px;
+        margin-top: 150px;
+        margin-bottom: 50px;
+    }
+
+    .quadro-vitorias {
+        width: 300px;
+        height: 200px;
+    }
+    .cards {
+        display: grid;
+        justify-items: center;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 13px;
+        grid-row-gap: 0px;
+        overflow-y: auto;
+    }
+
+    #card1 {
+        grid-area: 1 / 1 / 2 / 2;
+    }
+    #card2 {
+        grid-area: 1 / 2 / 2 / 3;
+    }
+    #card3 {
+        grid-area: 2 / 1 / 3 / 2;
+    }
+    #card4 {
+        grid-area: 2 / 2 / 3 / 3;
+    }
+    #card5 {
+        grid-area: 3 / 1 / 4 / 2;
+    }
+    #btnVolatDeck {
+        margin-top: 10px;
+    }
+}
+
 /* responsive to mobile */
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 717px) {
     #cadastro,
     #login {
         width: 90vw;
@@ -429,12 +517,18 @@ body.hideScroll {
     #form-cadastro {
         overflow: auto;
     }
-}
+    .card {
+        margin: 0;
+        align-content: normal;
+        width: 150px;
+        height: 300px;
+        position: relative;
+    }
 
-@media screen and (min-width: 320px) and (max-width: 1178px) {
     .arrow,
     .sobrepor {
         display: block;
+        overflow: hidden;
     }
 
     .sobrepor {
