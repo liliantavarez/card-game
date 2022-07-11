@@ -2,7 +2,7 @@
 const express = require("express");
 const crypto = require("crypto");
 const transporter = require("../modelos/sendMail");
-const Post = require("../database/dataBaseModel");
+const db = require("../database/dataBaseModel");
 
 const router = express.Router();
 
@@ -23,7 +23,8 @@ router.post("/recSenha", async (req, res) => {
     console.log(req.body);
     const { emailRec } = req.body;
     try {
-        const user = await Post.findOne({ where: { email: emailRec } });
+        const user = await db.Post.findOne({ where: { email: emailRec } });
+        console.log(user);
         if (!user) {
             res.render("recSenha", { message: "Usuario não encontrado" });
         }
@@ -32,7 +33,8 @@ router.post("/recSenha", async (req, res) => {
 
         const agora = new Date();
         agora.setHours(agora.getHours() + 1);
-        const usuario = await Post.findByPk(user.id);
+        const usuario = await db.Post.findByPk(user.id);
+        console.log(usuario.email);
         usuario.senhaToken = token;
         usuario.senhaTokenEspira = agora;
         usuario.save();
