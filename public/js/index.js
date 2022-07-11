@@ -102,11 +102,11 @@ function cross(id) {
         const valorDef = document.getElementById("quantDef");
         removerAtt(valorTotal, valorDef);
         desativaCheck(1);
-        ativaCross(1);
+        desativaCross(1);
     } else if (id === "btCrossAtaq") {
         const valorAtaq = document.getElementById("quantAtaq");
         removerAtt(valorTotal, valorAtaq);
         desativaCheck(0);
-        ativaCross(0);
+        desativaCross(0);
     }
 }
