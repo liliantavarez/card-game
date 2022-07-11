@@ -25,7 +25,7 @@ router.post("/recSenha", async (req, res) => {
     try {
         const user = await Post.findOne({ where: { email: emailRec } });
         if (!user) {
-            return res.status(400).send({ error: "usuario não encontrado" });
+            res.render("recSenha", { message: "Usuario não encontrado" });
         }
 
         const token = crypto.randomBytes(20).toString("hex");
@@ -39,7 +39,7 @@ router.post("/recSenha", async (req, res) => {
         sendEmail(emailRec, token);
         res.redirect("/novaSenha");
     } catch (err) {
-        res.status(400).send({ error: "E-mail nao cadastrado" });
+        res.render("recSenha", { message: "E-mail não cadastrado" });
     }
 });
 

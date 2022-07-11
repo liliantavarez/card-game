@@ -1,8 +1,10 @@
 <div id="recSenha" class="container text-center">
     <div class="row" style="height:100vh; align-items: center;">
         <div class="col-md-6 offset-md-3">
+
             <form action="/recSenha" method="POST">
-                <div class="form-group" id="sandMail">
+
+                <div class="form-group mb-5" id="sandMail">
                     <label class="color-text" for="InputEmail">Endereço de email</label>
                     <input id="inputEmail" name="emailRec" class="form-control" placeholder="Digite seu E-mail"
                         type="email" data-error="Por favor, informe um e-mail correto." required>
@@ -12,13 +14,18 @@
                         <p class="mb-0 color-text">Nunca vamos compartilhar seu email, com ninguém.</p>
                     </small>
                 </div>
-                <section class="btns">
-                    <button type="submit" class="mt-4 btn color-text color-gradient btn-lg">Enviar</button>
-                   
-                       <button type="submit" class="mt-4 btn color-gradient btn-lg"><a href="/">Voltar</a></button>
-                   
+                    {{#if message}}
+                    <p class="alert alert-danger">{{message}}</p>
+                    {{/if}}
+                <section class="btns mt-5">
+
+                    <button type="submit" class="btn color-text color-gradient btn-lg">Enviar</button>
+
+                    <button type="submit" class="btn color-gradient btn-lg"><a href="/">Voltar</a></button>
+
                 </section>
             </form>
+
         </div>
     </div>
 </div>
