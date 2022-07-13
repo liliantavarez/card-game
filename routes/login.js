@@ -22,7 +22,10 @@ router.post("/", async (req, res) => {
         res.render("login", { message: "Senha incorreta" });
     } else {
         res.redirect("/perfil");
+        console.log(user)
+        return user.id
     }
 });
 
-module.exports = router;
+module.exports = router
+

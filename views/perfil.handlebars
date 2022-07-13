@@ -43,8 +43,9 @@
         </div>
         <div class="quadro-vitorias">
             <p id="nome-Quadro" class="color-text">Vitorias</p>
-            <p id="qnt-vitorias" class="color-text">0</p>
-
+            {{#each userInfo}}
+            <p id="qnt-vitorias" class="color-text">{{vitorias}}</p>
+            {{/each}}
         </div>
         <button id="btn-MudarImagem" class="btn color-gradient color-text">Mudar Imagem</button>
     </div>
