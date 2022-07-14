@@ -43,7 +43,7 @@
         </div>
         <div class="quadro-vitorias">
             <p id="nome-Quadro" class="color-text">Vitorias</p>
-            {{#each userInfo}}
+            {{#each perfilInfo}}
             <p id="qnt-vitorias" class="color-text">{{vitorias}}</p>
             {{/each}}
         </div>
@@ -58,7 +58,9 @@
 
         <section id="historico">
             <h1 class="color-text">Historico</h1>
-            <p class="color-text">Resultados Recentes</p>
+            {{#each perfilInfo}}
+            <p class="color-text">{{historico}}</p>
+            {{/each}}
         </section>
         <section id="container-sobre">
             <div id="sobre">

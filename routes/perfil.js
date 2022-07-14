@@ -15,7 +15,11 @@ router.get("/perfil", (req, res) => {
 
 router.get("/perfil/:id", async (req, res) => {
     idUser = req.params.id;
-    res.render("perfil");
+    db.PostInfos.findByPk(idUser).then((perfilInfo)=>{
+        res.render("perfil", {perfilInfo: perfilInfo});
+    })
+    
+    
 });
 
 router.post("/perfil/:id", bodyParse.json(), async (req, res) => {

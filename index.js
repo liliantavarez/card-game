@@ -10,8 +10,8 @@ const cadastroRoute = require("./routes/cadastro");
 const novaSenhaRoute = require("./routes/novaSenha");
 const loginRoute = require("./routes/login");
 const perfilRoute = require("./routes/perfil");
-const modelDataBase = require("./database/dataBaseModel");
-const perfilRoute = require("./routes/perfil")
+
+
 
 // config
 // template engine
