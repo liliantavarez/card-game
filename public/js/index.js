@@ -1,3 +1,7 @@
+/* eslint-disable func-names */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable operator-linebreak */
 function onOffDeckCards() {
     document.querySelector("#deckCards").classList.toggle("hide");
     document.getElementsByClassName("parent")[0].classList.toggle("hideScroll");
@@ -21,8 +25,8 @@ function ativaCross(index) {
 }
 
 function desativaCross(index) {
-    document.getElementsByClassName("imgCross")[index].style.filter
-        = "grayscale(100%)";
+    document.getElementsByClassName("imgCross")[index].style.filter =
+        "grayscale(100%)";
     document.getElementsByClassName("btCross")[index].disabled = true;
 }
 
@@ -32,8 +36,8 @@ function ativaCheck(index) {
 }
 
 function desativaCheck(index) {
-    document.getElementsByClassName("imgCheck")[index].style.filter
-        = "grayscale(100%)";
+    document.getElementsByClassName("imgCheck")[index].style.filter =
+        "grayscale(100%)";
     document.getElementsByClassName("btCheck")[index].disabled = true;
 }
 
@@ -91,7 +95,10 @@ function removerAtt(valorTotal, valorAtt) {
 }
 
 function cross(id) {
-    const valorTotal = parseInt(document.getElementById("total").placeholder, 10);
+    const valorTotal = parseInt(
+        document.getElementById("total").placeholder,
+        10,
+    );
 
     if (id === "btCrossMag") {
         const valorMag = document.getElementById("quantMag");
@@ -110,3 +117,32 @@ function cross(id) {
         desativaCross(0);
     }
 }
+
+function criarCarta() {
+    const nome = document.getElementById("nomeCarta").value;
+    const ataque = document.getElementById("quantAtaq").value;
+    const defesa = document.getElementById("quantDef").value;
+    const magia = document.getElementById("quantMag").value;
+    const imagem = document.getElementById("preview").src;
+
+    const carta = {
+        nome,
+        ataque,
+        defesa,
+        magia,
+        imagem,
+    };
+    console.log(carta);
+
+    const options = {
+        method: "POST",
+        headers: new Headers({ "content-type": "application/json" }),
+        body: JSON.stringify(carta),
+    };
+    fetch("http://localhost:8081/perfil/:id", options).then(res => {
+        // document.getElementById("title").value = "";
+        // document.getElementById("desc").value = "";
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {});
