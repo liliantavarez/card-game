@@ -77,8 +77,8 @@
 </form>
 
 
-<div id="deckCards" class="hide" id="form-cadastro" action="/cadastro" method="POST" data-toggle="validator" role="form">
-    <div class="cards">
+<div id="deckCards" class="hide" id="form-cadastro">
+    <div class="cards" role="form">
         <div id="card1" class="card card_front text-center">
 
             <img id="preview" class="card-img-top"
@@ -87,17 +87,17 @@
             <input style="display:none" type="file" id="fupload" name="fupload" class="fupload form-control">
 
             <div class="card-header">
-                <input type="text" placeholder="Nome da Carta">
+                <input type="text" id="nomeCarta" name="nomeCarta" placeholder="Nome da Carta">
             </div>
             <div class="card-body">
                 <div class="card-text">
                     <label for="floatingInput">Valor total: </label>
-                    <input type="number" id="total" placeholder="150" style="width:35px; height:35px;" disabled="">
+                    <input type="number" id="total" placeholder="100" style="width:35px; height:35px;" disabled="">
 
                     <ul class=" list-atributos">
                         <li class="atributos">Ataque
                             <input class="inputCard" onclick="onOff(id)" type="number" id="quantAtaq" name="quantAtaq"
-                                min="1" max="150">
+                                min="1" max="100">
                             <div class="input-icons" id="check-cross">
 
                                 <button class="btCheck" onclick="check(id)" id="btCheckAtaq" type="submit" disabled="">
@@ -116,7 +116,7 @@
 
                         <li class="atributos">Defesa
                             <input class="inputCard" type="number" onclick="onOff(id)" id="quantDef" name="quantDef"
-                                min="1" max="150">
+                                min="1" max="100">
 
                             <div class="input-icons" id="check-cross">
 
@@ -136,7 +136,7 @@
 
                         <li class="atributos">Mágia
                             <input class="inputCard" type="number" onclick="onOff(id)" id="quantMag" name="quantMag"
-                                min="1" max="150">
+                                min="1" max="100">
 
                             <div class="input-icons" id="check-cross">
                                 <button class="btCheck" id="btCheckMag" onclick="check(id)" type="submit" disabled="">
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <div class="card-footer mb-2">
-                <button class="btn color-gradient color-text" disabled="">Salvar</button>
+                <button class="btn color-gradient color-text" onclick="criarCarta()">Salvar</button>
                 <button class="btn color-gradient color-text" disabled="">Excluir</button>
             </div>
         </div>

@@ -24,9 +24,8 @@ router.post("/recSenha", async (req, res) => {
     const { emailRec } = req.body;
     try {
         const user = await db.Post.findOne({ where: { email: emailRec } });
-        console.log(user);
         if (!user) {
-            return res.status(400).send({ error: "usuario não encontrado" });
+            res.render("recSenha", { message: "Usuario não encontrado" });
         }
 
         const token = crypto.randomBytes(20).toString("hex");
@@ -34,15 +33,13 @@ router.post("/recSenha", async (req, res) => {
         const agora = new Date();
         agora.setHours(agora.getHours() + 1);
         const usuario = await db.Post.findByPk(user.id);
-        console.log(usuario.email);
         usuario.senhaToken = token;
         usuario.senhaTokenEspira = agora;
         usuario.save();
         sendEmail(emailRec, token);
         res.redirect("/novaSenha");
     } catch (err) {
-        // console.log(err);
-        res.status(400).send({ error: "E-mail nao cadastrado" });
+        res.render("recSenha", { message: "E-mail não cadastrado" });
     }
 });
 

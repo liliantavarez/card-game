@@ -21,9 +21,7 @@ router.post("/", async (req, res) => {
     } else if (user.senha !== req.body.senha) {
         res.render("login", { message: "Senha incorreta" });
     } else {
-        res.redirect("/perfil");
-        console.log(user)
-        return user.id
+        res.redirect(`/perfil/${user.id}`);
     }
 });
 
