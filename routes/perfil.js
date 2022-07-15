@@ -18,7 +18,7 @@ router.get("/perfil/:id", async (req, res) => {
     res.render("perfil");
 });
 
-router.post("/perfil/:id", bodyParse.json(), async (req, res) => {
+router.post("/perfil/:id/novacarta", bodyParse.json(), async (req, res) => {
     let carta = req.body;
     db.Cartas.create({
         idUsuario: idUser,
@@ -34,6 +34,17 @@ router.post("/perfil/:id", bodyParse.json(), async (req, res) => {
         .catch(err => {
             res.send(err);
         });
+});
+router.get("/perfil/:id/cartas", async (req, res) => {
+    let { id } = req.params;
+    console.log(idUser);
+    console.log(id);
+    let cartas = await db.Cartas.findAll({
+        where: {
+            idUsuario: idUser || id,
+        },
+    });
+    res.json(JSON.stringify(cartas));
 });
 
 module.exports = router;
