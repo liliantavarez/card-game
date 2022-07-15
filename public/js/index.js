@@ -1,14 +1,16 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-use-before-define */
 /* eslint-disable func-names */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable operator-linebreak */
-function onOffDeckCards() {
-    document.querySelector("#deckCards").classList.toggle("hide");
-    document.getElementsByClassName("parent")[0].classList.toggle("hideScroll");
-    document.querySelector("body").classList.toggle("hideScroll");
-    document.querySelector("#deckCards").classList.toggle("addScroll");
-}
+
+document.addEventListener("DOMContentLoaded", () => {
+    atualizaCartas();
+});
+
 function readImage() {
+    console.log("veio aqui");
     if (this.files && this.files[0]) {
         const file = new FileReader();
         file.onload = function (e) {
@@ -18,6 +20,13 @@ function readImage() {
     }
 }
 document.getElementById("fupload").addEventListener("change", readImage, false);
+
+function onOffDeckCards() {
+    document.querySelector("#deckCards").classList.toggle("hide");
+    document.getElementsByClassName("parent")[0].classList.toggle("hideScroll");
+    document.querySelector("body").classList.toggle("hideScroll");
+    document.querySelector("#deckCards").classList.toggle("addScroll");
+}
 
 function ativaCross(index) {
     document.getElementsByClassName("imgCross")[index].style.filter = "none";
@@ -56,7 +65,7 @@ function onOff(id) {
 function totalValor(valorTotal, valorAtt) {
     const att = valorAtt;
     let total = valorTotal;
-    if (att.value < total) {
+    if (att.value <= total) {
         total -= att.value;
         document.getElementById("total").placeholder = total;
         att.disabled = "true";
@@ -125,24 +134,102 @@ function criarCarta() {
     const magia = document.getElementById("quantMag").value;
     const imagem = document.getElementById("preview").src;
 
-    const carta = {
-        nome,
-        ataque,
-        defesa,
-        magia,
-        imagem,
-    };
-    console.log(carta);
+    if (
+        nome === "" ||
+        ataque === "" ||
+        defesa === "" ||
+        magia === "" ||
+        imagem === ""
+    ) {
+        document.getElementById("alert-card").style.display = "inline";
+    } else {
+        const carta = {
+            nome,
+            ataque,
+            defesa,
+            magia,
+            imagem,
+        };
+        console.log(carta);
 
-    const options = {
-        method: "POST",
-        headers: new Headers({ "content-type": "application/json" }),
-        body: JSON.stringify(carta),
-    };
-    fetch("http://localhost:8081/perfil/:id", options).then(res => {
-        // document.getElementById("title").value = "";
-        // document.getElementById("desc").value = "";
-    });
+        const options = {
+            method: "POST",
+            headers: new Headers({ "content-type": "application/json" }),
+            body: JSON.stringify(carta),
+        };
+        fetch("http://localhost:8081/perfil/:id/novacarta", options).then(
+            res => {
+                desativaCross(0);
+                desativaCross(1);
+                desativaCross(2);
+                document.getElementById("preview").src =
+                    "https://greenpng.com/wp-content/uploads/2020/06/untitleddesign_1_original-103-300x300.png";
+                document.getElementById("btnSalvar").style.display = "none";
+                document.getElementById("nomeCarta").placeholder =
+                    "Nome da Carta";
+                document.getElementById("total").placeholder = "100";
+                atualizaCartas();
+            },
+        );
+    }
 }
 
-document.addEventListener("DOMContentLoaded", () => {});
+function atualizaPerfil() {
+    fetch("http://localhost:8081/perfil/:id/board")
+        .then(res => res.json())
+        .then(json => {
+            const user = JSON.parse(json);
+            console.log(user.vitorias);
+            document.getElementById("qnt-vitorias").value = user.vitorias;
+        });
+}
+
+function atualizaCartas() {
+    fetch("http://localhost:8081/perfil/:id/cartas")
+        .then(res => res.json())
+        .then(json => {
+            let boardCartas = " ";
+            const cartas = JSON.parse(json);
+            cartas.forEach(carta => {
+                const novaCarta = ` 
+                
+                <div id="card${cartas.indexOf(carta) + 1}" class="card cardBD card_front text-center">
+
+                <img id="imgCard" class="card-img-top"
+                    src="${carta.imagem}">
+    
+                <div class="card-header">
+                    <h3 id="nomeCarta">${carta.nome}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        <ul class=" list-atributos">
+                            <li class="atributos">Ataque
+                                <input class="inputCard" disabled="" placeholder="${
+    carta.ataque
+}">   
+                            </li>
+    
+                            <li class="atributos">Defesa
+                            <input class="inputCard" disabled="" placeholder="${
+    carta.defesa
+}">
+                            </li>
+    
+                            <li class="atributos">Mágia
+                            <input class="inputCard" disabled="" placeholder="${
+    carta.magia
+}">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>`;
+
+                boardCartas += novaCarta;
+            });
+
+            document.getElementById("board").innerHTML = boardCartas;
+        });
+}
