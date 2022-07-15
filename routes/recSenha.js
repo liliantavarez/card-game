@@ -2,7 +2,7 @@
 const express = require("express");
 const crypto = require("crypto");
 const transporter = require("../modelos/sendMail");
-const Post = require("../database/dataBaseModel");
+const db = require("../database/dataBaseModel");
 
 const router = express.Router();
 
@@ -23,23 +23,23 @@ router.post("/recSenha", async (req, res) => {
     console.log(req.body);
     const { emailRec } = req.body;
     try {
-        const user = await Post.findOne({ where: { email: emailRec } });
+        const user = await db.Post.findOne({ where: { email: emailRec } });
         if (!user) {
-            return res.status(400).send({ error: "usuario não encontrado" });
+            res.render("recSenha", { message: "Usuario não encontrado" });
         }
 
         const token = crypto.randomBytes(20).toString("hex");
 
         const agora = new Date();
         agora.setHours(agora.getHours() + 1);
-        const usuario = await Post.findByPk(user.id);
+        const usuario = await db.Post.findByPk(user.id);
         usuario.senhaToken = token;
         usuario.senhaTokenEspira = agora;
         usuario.save();
         sendEmail(emailRec, token);
         res.redirect("/novaSenha");
     } catch (err) {
-        res.status(400).send({ error: "E-mail nao cadastrado" });
+        res.render("recSenha", { message: "E-mail não cadastrado" });
     }
 });
 

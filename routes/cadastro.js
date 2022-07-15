@@ -1,5 +1,5 @@
 const express = require("express");
-const Post = require("../database/dataBaseModel");
+const db = require("../database/dataBaseModel");
 
 const router = express.Router();
 
@@ -8,14 +8,21 @@ router.get("/cadastro", (req, res) => {
 });
 
 router.post("/cadastro", (req, res) => {
-    console.log(req.body.nome);
-    Post.create({
-        nome: req.body.nome,
+    db.PostInfos.create({
         email: req.body.email,
-        senha: req.body.senha,
     })
         .then(() => {
-            res.redirect("/");
+            db.Post.create({
+                nome: req.body.nome,
+                email: req.body.email,
+                senha: req.body.senha,
+            })
+                .then(() => {
+                    res.redirect("/");
+                })
+                .catch(err => {
+                    res.send(err);
+                });
         })
         .catch(err => {
             res.send(err);
