@@ -24,7 +24,6 @@ router.post("/recSenha", async (req, res) => {
     const { emailRec } = req.body;
     try {
         const user = await db.Post.findOne({ where: { email: emailRec } });
-        console.log(user);
         if (!user) {
             res.render("recSenha", { message: "Usuario não encontrado" });
         }
@@ -34,7 +33,6 @@ router.post("/recSenha", async (req, res) => {
         const agora = new Date();
         agora.setHours(agora.getHours() + 1);
         const usuario = await db.Post.findByPk(user.id);
-        console.log(usuario.email);
         usuario.senhaToken = token;
         usuario.senhaTokenEspira = agora;
         usuario.save();

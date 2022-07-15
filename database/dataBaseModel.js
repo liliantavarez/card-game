@@ -35,11 +35,38 @@ const PostInfos = db.sequelize.define("perfilinfos", {
     },
 });
 
+const Cartas = db.sequelize.define("cartas", {
+    idUsuario: {
+        type: db.Sequelize.INTEGER,
+        references: {
+            model: "perfilinfos",
+            key: "id",
+        },
+    },
+    nome: {
+        type: db.Sequelize.STRING,
+    },
+    ataque: {
+        type: db.Sequelize.INTEGER,
+    },
+    defesa: {
+        type: db.Sequelize.INTEGER,
+    },
+    magia: {
+        type: db.Sequelize.INTEGER,
+    },
+    imagem: {
+        type: db.Sequelize.STRING,
+    },
+});
+
 // Recriando tabela
 // Post.sync({ force: true });
 // PostInfos.sync({ force: true });
+// Cartas.sync({ force: true });
 
 module.exports = {
     Post,
     PostInfos,
+    Cartas,
 };

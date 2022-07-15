@@ -77,14 +77,14 @@
 
 <div id="deckCards" class="hide" id="form-cadastro">
     <div id="cardCreate" class="card card_front text-center">
-
         <img id="preview" class="card-img-top" src="https://www.odetelis.com/media//colorselectorplus/swatches/209.jpg">
         <label for="fupload" class="btn btn-dark control-label label-bordered">Imagem</label>
         <input type="file" style="display:none ;" id="fupload" class="fupload form-control">
-
+        
         <div class="card-header">
             <input type="text" id="nomeCarta" name="nomeCarta" placeholder="Nome da Carta">
         </div>
+        
         <div class="card-body">
             <div class="card-text">
                 <label for="floatingInput">Valor total: </label>
@@ -149,11 +149,14 @@
             </div>
             <p id="alert-card" class="alert alert-danger">Informe todos os dados!</p>
         </div>
+        
         <div class="card-footer mb-2">
             <button class="btn color-gradient bt-lg color-text" id="btnSalvar" onclick="criarCarta(id)">Salvar</button>
             {{!-- <button class="btn color-gradient color-text" disabled="">Excluir</button> --}}
         </div>
+        
     </div>
+    
     <div id="board" class="cards" role="form">
 
         {{!-- <div class="card card_back"></div> --}}
