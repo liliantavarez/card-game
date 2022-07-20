@@ -3,27 +3,29 @@
 /* eslint-disable prefer-const */
 const express = require("express");
 const bodyParse = require("body-parser");
-
+const multer = require("multer")
 const router = express.Router();
 const db = require("../database/dataBaseModel");
-
+const path = require('path')
+const storage  = multer.diskStorage({
+    destination:(req, file, callBack)=>{
+        callBack(null, path.resolve('../public/imgs/upload'));
+    },
+    filename: (req, file, callBack)=>{
+        const time = new Date().getTime();
+        callBack(null, `${time}_${file.originalname}`)
+    }
+})
+const uploud = multer({storage:storage})
 var idUser = "";
 
-router.get("/perfil", (req, res) => {
+router.get("/perfil/:id", (req, res) => {
     res.render("perfil");
 });
 
-router.get("/perfil/:id", async (req, res) => {
-    idUser = req.params.id;
-    db.PostInfos.findByPk(idUser).then((perfilInfo)=>{
-        res.render("perfil", {perfilInfo: perfilInfo});
-    })
-    
-    
-});
-
-router.post("/perfil/:id", bodyParse.json(), async (req, res) => {
+router.post("/perfil/:id", bodyParse.json(), uploud.single('imagemPerfil'), async (req, res) => {
     let carta = req.body;
+    console.log(req.file)
     db.Cartas.create({
         idUsuario: idUser,
         nome: carta.nome,
@@ -38,6 +40,7 @@ router.post("/perfil/:id", bodyParse.json(), async (req, res) => {
         .catch(err => {
             res.send(err);
         });
+        
 });
 
 module.exports = router;

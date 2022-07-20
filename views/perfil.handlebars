@@ -1,4 +1,4 @@
-<form id="form-perfil" action="/perfil" method="GET" role="form" class="parent">
+<form id="form-perfil" action="perfil" method="POST" role="form" class="parent" enctype="multipart/form-data">
     <div class="div1">
         <div class="name-icon">
             <img id="icon-game" src="../public/imgs/icon-game.png" alt="">
@@ -43,13 +43,13 @@
         </div>
         <div class="quadro-vitorias">
             <p id="nome-Quadro" class="color-text">Vitorias</p>
-            {{#each perfilInfo}}
-            <p id="qnt-vitorias" class="color-text">{{vitorias}}</p>
-            {{/each}}
+            <p id="qnt-vitorias" class="color-text">0</p>
         </div>
-        <button id="btn-MudarImagem" class="btn color-gradient color-text">Mudar Imagem</button>
+        <button id="btn-MudarImagem" class="btn color-gradient color-text">
+            <input type="file" name="imagemPerfil">
+            <input type="submit" value="Mudar magem">
+            </button>
     </div>
-
     <div class="div3">
         <section id="perfil-feedback">
             <button id="bt-feedback" class="color-text">FeedBack</button>
