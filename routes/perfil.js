@@ -1,14 +1,17 @@
+/* eslint-disable vars-on-top */
 /* eslint-disable no-var */
 /* eslint-disable no-undef */
 /* eslint-disable prefer-const */
 const express = require("express");
 const bodyParse = require("body-parser");
 const multer = require("multer");
+const cors = require("cors");
 
 const router = express.Router();
 const path = require("path");
 const db = require("../database/dataBaseModel");
 
+router.use(cors());
 const storage = multer.diskStorage({
     destination: (req, file, callBack) => {
         callBack(null, path.resolve("../public/imgs/upload"));
@@ -19,7 +22,10 @@ const storage = multer.diskStorage({
     },
 });
 
-const uploud = multer({ storage });
+const uploud = multer({
+    storage,
+});
+
 var idUser = "";
 
 router.get("/perfil/:id", async (req, res) => {
@@ -27,23 +33,29 @@ router.get("/perfil/:id", async (req, res) => {
     res.render("perfil");
 });
 
-router.post("/perfil/:id/novacarta", bodyParse.json(), async (req, res) => {
-    let carta = req.body;
-    db.Cartas.create({
-        idUsuario: idUser,
-        nome: carta.nome,
-        ataque: carta.ataque,
-        defesa: carta.defesa,
-        magia: carta.magia,
-        imagem: carta.imagem,
-    })
-        .then(() => {
-            res.redirect(`/perfil/${idUser}`);
+router.post(
+    "/perfil/:id/novacarta",
+    uploud.single("imagem"),
+    bodyParse.json(),
+    async (req, res) => {
+        let carta = req.body;
+        console.log(req.file);
+        db.Cartas.create({
+            idUsuario: idUser,
+            nome: carta.nome,
+            ataque: carta.ataque,
+            defesa: carta.defesa,
+            magia: carta.magia,
+            imagem: req.file,
         })
-        .catch(err => {
-            res.send(err);
-        });
-});
+            .then(() => {
+                res.redirect(`/perfil/${idUser}`);
+            })
+            .catch(err => {
+                res.send(err);
+            });
+    },
+);
 
 router.get("/perfil/:id/board", async (req, res) => {
     let { id } = req.params.id;
