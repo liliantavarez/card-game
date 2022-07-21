@@ -10,11 +10,18 @@ const cadastroRoute = require("./routes/cadastro");
 const novaSenhaRoute = require("./routes/novaSenha");
 const loginRoute = require("./routes/login");
 const perfilRoute = require("./routes/perfil");
-const modelDataBase = require("./database/dataBaseModel");
+
+
 
 // config
 // template engine
-app.engine("handlebars", engine({ defaultLayout: "main" }));
+app.engine('handlebars', engine({
+    defaultLayout: 'main',
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true,
+    },
+}))
 app.set("view engine", "handlebars");
 
 app.set("views", "./views");
