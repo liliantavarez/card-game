@@ -25,6 +25,7 @@ function readImage() {
 document.getElementById("fupload").addEventListener("change", readImage, false);
 
 function onOffDeckCards() {
+    resetInputs();
     document.getElementById("alert-card").style.display = "none";
     document.querySelector("#deckCards").classList.toggle("hide");
     document.getElementsByClassName("parent")[0].classList.toggle("hideScroll");
@@ -163,14 +164,6 @@ function criarCarta() {
         };
         fetch("http://localhost:8081/perfil/:id/novacarta", options).then(
             res => {
-                desativaCross(0);
-                desativaCross(1);
-                desativaCross(2);
-                document.getElementById("preview").src =
-                    "https://greenpng.com/wp-content/uploads/2020/06/untitleddesign_1_original-103-300x300.png";
-                document.getElementById("nomeCarta").placeholder =
-                    "Nome da Carta";
-                document.getElementById("total").placeholder = "100";
                 resetInputs();
                 atualizaCartas();
             },
@@ -179,6 +172,13 @@ function criarCarta() {
 }
 
 function resetInputs() {
+    desativaCross(0);
+    desativaCross(1);
+    desativaCross(2);
+    document.getElementById("preview").src =
+        "https://greenpng.com/wp-content/uploads/2020/06/untitleddesign_1_original-103-300x300.png";
+    document.getElementById("nomeCarta").placeholder = "Nome da Carta";
+    document.getElementById("total").placeholder = "100";
     document.getElementById("nomeCarta").value = "";
     document.getElementById("quantAtaq").value = "";
     document.getElementById("quantAtaq").disabled = false;
