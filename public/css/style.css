@@ -173,8 +173,9 @@ a:hover,
     display: flex;
     align-items: center;
     width: 260px;
-    height: 490px;
-    margin-top: 50px;
+    margin: 10px;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
 }
 .cardBD {
     display: inline-block;
@@ -314,6 +315,7 @@ ul {
 
 #qnt-vitorias {
     font-weight: 700;
+    margin-top: 30px;
     font-size: 72px;
     line-height: 89px;
 }
@@ -393,6 +395,7 @@ ul {
     flex-wrap: wrap;
 
 }
+
 #cardCreate {
 
 }
@@ -406,6 +409,10 @@ ul {
 }
 
 #cardFav{
+    margin: 40px 0;
+}
+
+#cardFav {
     margin: 40px 0;
 }
 
@@ -472,32 +479,9 @@ body.hideScroll {
         width: 300px;
         height: 200px;
     }
-    .cards {
-        display: grid;
-        justify-items: center;
-        align-items: center;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        grid-column-gap: 13px;
-        grid-row-gap: 0px;
+    #btnVolatDeck {
+        margin-top: 10px;
     }
-
-    #card1 {
-        grid-area: 1 / 1 / 2 / 2;
-    }
-    #card2 {
-        grid-area: 1 / 2 / 2 / 3;
-    }
-    #card3 {
-        grid-area: 2 / 1 / 3 / 2;
-    }
-    #card4 {
-        grid-area: 2 / 2 / 3 / 3;
-    }
-    #card5 {
-        grid-area: 3 / 1 / 4 / 2;
-    }
-
 }
 
 /* responsive to mobile */
@@ -519,8 +503,7 @@ body.hideScroll {
         margin: 0;
         align-content: normal;
         width: 150px;
-        height: 300px;
-        /* position: relative; */
+        position: relative;
     }
 
     .arrow,
