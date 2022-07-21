@@ -1,25 +1,33 @@
+/* eslint-disable radix */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable vars-on-top */
 /* eslint-disable no-var */
 /* eslint-disable no-undef */
 /* eslint-disable prefer-const */
 const express = require("express");
 const bodyParse = require("body-parser");
 const multer = require("multer");
+const cors = require("cors");
 
 const router = express.Router();
 const path = require("path");
 const db = require("../database/dataBaseModel");
 
-const storage = multer.diskStorage({
-    destination: (req, file, callBack) => {
-        callBack(null, path.resolve("../public/imgs/upload"));
-    },
-    filename: (req, file, callBack) => {
-        const time = new Date().getTime();
-        callBack(null, `${time}_${file.originalname}`);
-    },
-});
+router.use(cors());
+// const storage = multer.diskStorage({
+//     destination: (req, file, callBack) => {
+//         callBack(null, path.resolve("../public/imgs/upload"));
+//     },
+//     filename: (req, file, callBack) => {
+//         const time = new Date().getTime();
+//         callBack(null, `${time}_${file.originalname}`);
+//     },
+// });
 
-const uploud = multer({ storage });
+// const uploud = multer({
+//     storage,
+// });
+
 var idUser = "";
 
 router.get("/perfil/:id", async (req, res) => {
@@ -27,10 +35,11 @@ router.get("/perfil/:id", async (req, res) => {
     res.render("perfil");
 });
 
-router.post("/perfil/:id/novacarta", bodyParse.json(), async (req, res) => {
+router.post("/perfil/:id/novacarta", bodyParse.json(), (req, res) => {
     let carta = req.body;
+    id = req.headers.referer.split("http://localhost:8081/perfil/")[1];
     db.Cartas.create({
-        idUsuario: idUser,
+        idUsuario: id,
         nome: carta.nome,
         ataque: carta.ataque,
         defesa: carta.defesa,
@@ -47,7 +56,7 @@ router.post("/perfil/:id/novacarta", bodyParse.json(), async (req, res) => {
 
 router.get("/perfil/:id/board", async (req, res) => {
     let { id } = req.params.id;
-    console.log(idUser);
+    console.log("Board", idUser);
     console.log(id);
     let userInfos = await db.PostInfos.findOne({
         where: {
@@ -56,10 +65,10 @@ router.get("/perfil/:id/board", async (req, res) => {
     });
     res.json(JSON.stringify(userInfos));
 });
+
 router.get("/perfil/:id/cartas", async (req, res) => {
-    let { id } = req.params;
-    console.log(idUser);
-    console.log(id);
+    console.log("Cartas", idUser);
+    let id = req.params;
     let cartas = await db.Cartas.findAll({
         where: {
             idUsuario: idUser || id,

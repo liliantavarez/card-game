@@ -1,3 +1,5 @@
+/* eslint-disable no-implied-eval */
+/* eslint-disable no-extra-parens */
 /* eslint-disable indent */
 /* eslint-disable no-use-before-define */
 /* eslint-disable func-names */
@@ -23,6 +25,7 @@ function readImage() {
 document.getElementById("fupload").addEventListener("change", readImage, false);
 
 function onOffDeckCards() {
+    document.getElementById("alert-card").style.display = "none";
     document.querySelector("#deckCards").classList.toggle("hide");
     document.getElementsByClassName("parent")[0].classList.toggle("hideScroll");
     document.querySelector("body").classList.toggle("hideScroll");
@@ -187,7 +190,7 @@ function resetInputs() {
 }
 
 function atualizaPerfil() {
-    fetch("http://localhost:8081/perfil/:id/board", { mode: "no-cors" })
+    fetch("http://localhost:8081/perfil/:id/board")
         .then(res => res.json())
         .then(json => {
             const user = JSON.parse(json);
@@ -196,7 +199,7 @@ function atualizaPerfil() {
 }
 
 function atualizaCartas() {
-    fetch("http://localhost:8081/perfil/:id/cartas", { mode: "no-cors" })
+    fetch("http://localhost:8081/perfil/:id/cartas")
         .then(res => res.json())
         .then(json => {
             let boardCartas = " ";
