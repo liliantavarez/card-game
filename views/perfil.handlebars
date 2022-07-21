@@ -1,4 +1,4 @@
-<form id="form-perfil" action="/perfil" method="GET" role="form" class="parent">
+<form id="form-perfil" action="perfil" method="POST" role="form" class="parent" enctype="multipart/form-data">
     <div class="div1">
         <div class="name-icon">
             <img id="icon-game" src="../public/imgs/icon-game.png" alt="">
@@ -43,11 +43,14 @@
         </div>
         <div class="quadro-vitorias">
             <p id="nome-Quadro" class="color-text">Vitorias</p>
-            <p id="qnt-vitorias" class="color-text">0</p>
-        </div>
-        <button id="btn-MudarImagem" class="btn color-gradient color-text">Mudar Imagem</button>
-    </div>
+            <p id="qnt-vitorias" class="color-text"></p>
 
+        </div>
+        <button id="btn-MudarImagem" class="btn color-gradient color-text">
+            <label for="fupload" class="bt-lg control-label label-bordered">Mudar imagem do perfil</label>
+            <input type="file" style="display:none ;" id="fupload" class="fupload form-control" name="imagemPerfil">
+        </button>
+    </div>
     <div class="div3">
         <section id="perfil-feedback">
             <button id="bt-feedback" class="color-text">FeedBack</button>
@@ -56,7 +59,9 @@
 
         <section id="historico">
             <h1 class="color-text">Historico</h1>
-            <p class="color-text">Resultados Recentes</p>
+            {{#each perfilInfo}}
+            <p class="color-text">{{historico}}</p>
+            {{/each}}
         </section>
         <section id="container-sobre">
             <div id="sobre">
@@ -80,11 +85,11 @@
         <img id="preview" class="card-img-top" src="https://www.odetelis.com/media//colorselectorplus/swatches/209.jpg">
         <label for="fupload" class="btn btn-dark control-label label-bordered">Imagem</label>
         <input type="file" style="display:none ;" id="fupload" class="fupload form-control">
-        
+
         <div class="card-header">
             <input type="text" id="nomeCarta" name="nomeCarta" placeholder="Nome da Carta">
         </div>
-        
+
         <div class="card-body">
             <div class="card-text">
                 <label for="floatingInput">Valor total: </label>
@@ -149,14 +154,14 @@
             </div>
             <p id="alert-card" class="alert alert-danger">Informe todos os dados!</p>
         </div>
-        
+
         <div class="card-footer mb-2">
             <button class="btn color-gradient bt-lg color-text" id="btnSalvar" onclick="criarCarta(id)">Salvar</button>
             {{!-- <button class="btn color-gradient color-text" disabled="">Excluir</button> --}}
         </div>
-        
+
     </div>
-    
+
     <div id="board" class="cards" role="form">
 
         {{!-- <div class="card card_back"></div> --}}

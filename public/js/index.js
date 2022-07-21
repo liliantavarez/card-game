@@ -1,4 +1,4 @@
-/* eslint-disable no-use-before-define */
+/* eslint-disable indent */
 /* eslint-disable no-use-before-define */
 /* eslint-disable func-names */
 /* eslint-disable import/extensions */
@@ -6,6 +6,7 @@
 /* eslint-disable operator-linebreak */
 
 document.addEventListener("DOMContentLoaded", () => {
+    atualizaPerfil();
     atualizaCartas();
 });
 
@@ -164,14 +165,25 @@ function criarCarta() {
                 desativaCross(2);
                 document.getElementById("preview").src =
                     "https://greenpng.com/wp-content/uploads/2020/06/untitleddesign_1_original-103-300x300.png";
-                document.getElementById("btnSalvar").style.display = "none";
                 document.getElementById("nomeCarta").placeholder =
                     "Nome da Carta";
                 document.getElementById("total").placeholder = "100";
+                resetInputs();
                 atualizaCartas();
             },
         );
     }
+}
+
+function resetInputs() {
+    document.getElementById("nomeCarta").value = "";
+    document.getElementById("quantAtaq").value = "";
+    document.getElementById("quantAtaq").disabled = false;
+    document.getElementById("quantMag").value = "";
+    document.getElementById("quantMag").disabled = false;
+    document.getElementById("quantDef").value = "";
+    document.getElementById("quantDef").disabled = false;
+    document.getElementById("total").placeholder = "100";
 }
 
 function atualizaPerfil() {
@@ -179,53 +191,48 @@ function atualizaPerfil() {
         .then(res => res.json())
         .then(json => {
             const user = JSON.parse(json);
-            console.log(user.vitorias);
-            document.getElementById("qnt-vitorias").value = user.vitorias;
+            document.getElementById("qnt-vitorias").innerHTML = user.vitorias;
         });
 }
 
 function atualizaCartas() {
-    fetch("http://localhost:8081/perfil/:id/cartas")
+    fetch("http://localhost:8081/perfil/:id/cartas", { mode: "no-cors" })
         .then(res => res.json())
         .then(json => {
             let boardCartas = " ";
             const cartas = JSON.parse(json);
             cartas.forEach(carta => {
-                const novaCarta = ` 
-                
-                <div id="card${cartas.indexOf(carta) + 1}" class="card cardBD card_front text-center">
+                const novaCarta = `
+                <div id="card${
+                    cartas.indexOf(carta) + 1
+                }" class="card cardBD card_front text-center">
+    <img id="imgCard" class="card-img-top" src="${carta.imagem}">
+        <div class="card-header">
+            <h3 id="nomeCarta">${carta.nome}</h3>
+        </div>
+        <div class="card-body">
+            <div class="card-text">
+                <ul class=" list-atributos">
+                    <li class="atributos">Ataque
+                        <input class="inputCard" disabled="" placeholder="${
+                            carta.ataque
+                        }">
+                    </li>
 
-                <img id="imgCard" class="card-img-top"
-                    src="${carta.imagem}">
-    
-                <div class="card-header">
-                    <h3 id="nomeCarta">${carta.nome}</h3>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <ul class=" list-atributos">
-                            <li class="atributos">Ataque
-                                <input class="inputCard" disabled="" placeholder="${
-    carta.ataque
-}">   
-                            </li>
-    
-                            <li class="atributos">Defesa
+                    <li class="atributos">Defesa
+                           <input class="inputCard" disabled="" placeholder="${
+                               carta.defesa
+                           }">
+                    </li>
+                    <li class="atributos">Mágia
                             <input class="inputCard" disabled="" placeholder="${
-    carta.defesa
-}">
-                            </li>
-    
-                            <li class="atributos">Mágia
-                            <input class="inputCard" disabled="" placeholder="${
-    carta.magia
-}">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>`;
+                                carta.magia
+                            }">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>`;
 
                 boardCartas += novaCarta;
             });

@@ -3,15 +3,24 @@
 /* eslint-disable prefer-const */
 const express = require("express");
 const bodyParse = require("body-parser");
+const multer = require("multer");
 
 const router = express.Router();
+const path = require("path");
 const db = require("../database/dataBaseModel");
 
-var idUser = "";
-
-router.get("/perfil", (req, res) => {
-    res.render("perfil");
+const storage = multer.diskStorage({
+    destination: (req, file, callBack) => {
+        callBack(null, path.resolve("../public/imgs/upload"));
+    },
+    filename: (req, file, callBack) => {
+        const time = new Date().getTime();
+        callBack(null, `${time}_${file.originalname}`);
+    },
 });
+
+const uploud = multer({ storage });
+var idUser = "";
 
 router.get("/perfil/:id", async (req, res) => {
     idUser = req.params.id;
@@ -34,6 +43,18 @@ router.post("/perfil/:id/novacarta", bodyParse.json(), async (req, res) => {
         .catch(err => {
             res.send(err);
         });
+});
+
+router.get("/perfil/:id/board", async (req, res) => {
+    let { id } = req.params.id;
+    console.log(idUser);
+    console.log(id);
+    let userInfos = await db.PostInfos.findOne({
+        where: {
+            id: idUser,
+        },
+    });
+    res.json(JSON.stringify(userInfos));
 });
 router.get("/perfil/:id/cartas", async (req, res) => {
     let { id } = req.params;
