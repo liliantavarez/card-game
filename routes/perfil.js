@@ -43,4 +43,16 @@ router.post("/perfil/:id", bodyParse.json(), uploud.single('imagemPerfil'), asyn
         
 });
 
+router.get("/perfil/:id/board", async (req, res) => {
+    let { id } = req.params;
+    console.log(idUser);
+    console.log(id);
+    let userInfos = await db.PostInfos.findOne({
+        where: {
+            id: idUser,
+        },
+    });
+    res.json(JSON.stringify(userInfos));
+});
+
 module.exports = router;
