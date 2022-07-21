@@ -5,23 +5,26 @@ const { engine } = require("express-handlebars");
 
 const app = express();
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const recSenhaRoute = require("./routes/recSenha");
 const cadastroRoute = require("./routes/cadastro");
 const novaSenhaRoute = require("./routes/novaSenha");
 const loginRoute = require("./routes/login");
 const perfilRoute = require("./routes/perfil");
 
-
-
+app.use(cors());
 // config
 // template engine
-app.engine('handlebars', engine({
-    defaultLayout: 'main',
-    runtimeOptions: {
-        allowProtoPropertiesByDefault: true,
-        allowProtoMethodsByDefault: true,
-    },
-}))
+app.engine(
+    "handlebars",
+    engine({
+        defaultLayout: "main",
+        runtimeOptions: {
+            allowProtoPropertiesByDefault: true,
+            allowProtoMethodsByDefault: true,
+        },
+    }),
+);
 app.set("view engine", "handlebars");
 
 app.set("views", "./views");
