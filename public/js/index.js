@@ -165,7 +165,6 @@ function criarCarta() {
                 desativaCross(2);
                 document.getElementById("preview").src =
                     "https://greenpng.com/wp-content/uploads/2020/06/untitleddesign_1_original-103-300x300.png";
-                document.getElementById("btnSalvar").style.display = "none";
                 document.getElementById("nomeCarta").placeholder =
                     "Nome da Carta";
                 document.getElementById("total").placeholder = "100";

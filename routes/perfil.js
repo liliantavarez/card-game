@@ -3,25 +3,24 @@
 /* eslint-disable prefer-const */
 const express = require("express");
 const bodyParse = require("body-parser");
-const multer = require("multer")
-const router = express.Router();
-const db = require("../database/dataBaseModel");
-const path = require('path')
-const storage  = multer.diskStorage({
-    destination:(req, file, callBack)=>{
-        callBack(null, path.resolve('../public/imgs/upload'));
-    },
-    filename: (req, file, callBack)=>{
-        const time = new Date().getTime();
-        callBack(null, `${time}_${file.originalname}`)
-    }
-})
-const uploud = multer({storage:storage})
-var idUser = "";
+const multer = require("multer");
 
-router.get("/perfil/:id", (req, res) => {
-    res.render("perfil");
+const router = express.Router();
+const path = require("path");
+const db = require("../database/dataBaseModel");
+
+const storage = multer.diskStorage({
+    destination: (req, file, callBack) => {
+        callBack(null, path.resolve("../public/imgs/upload"));
+    },
+    filename: (req, file, callBack) => {
+        const time = new Date().getTime();
+        callBack(null, `${time}_${file.originalname}`);
+    },
 });
+
+const uploud = multer({ storage });
+var idUser = "";
 
 router.get("/perfil/:id", async (req, res) => {
     idUser = req.params.id;
@@ -44,11 +43,10 @@ router.post("/perfil/:id/novacarta", bodyParse.json(), async (req, res) => {
         .catch(err => {
             res.send(err);
         });
-        
 });
 
 router.get("/perfil/:id/board", async (req, res) => {
-    let { id } = req.params;
+    let { id } = req.params.id;
     console.log(idUser);
     console.log(id);
     let userInfos = await db.PostInfos.findOne({
