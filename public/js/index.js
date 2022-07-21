@@ -187,7 +187,7 @@ function resetInputs() {
 }
 
 function atualizaPerfil() {
-    fetch("http://localhost:8081/perfil/:id/board", { mode: "no-cors" })
+    fetch("http://localhost:8081/perfil/:id/board")
         .then(res => res.json())
         .then(json => {
             const user = JSON.parse(json);
@@ -196,7 +196,7 @@ function atualizaPerfil() {
 }
 
 function atualizaCartas() {
-    fetch("http://localhost:8081/perfil/:id/cartas", { mode: "no-cors" })
+    fetch("http://localhost:8081/perfil/:id/cartas")
         .then(res => res.json())
         .then(json => {
             let boardCartas = " ";
